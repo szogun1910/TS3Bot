@@ -37,9 +37,18 @@
 	//LimitIP();
 	$lang['success_kick_LimitIP'] = "Osiągnieto limit połączeń z Twojego IP";
 
+	//Lvl()
+	$lang['row_Lvl'] = "[SIZE=10][COLOR=#ff0000][B]{1}.)[/B][/COLOR] {2} {3} {4}\n[/SIZE]";
+	$lang['list_Lvl'] = "{1}";
+	$lang['success_update_Lvl'] = "Gratulacje właśnie awansowałeś na {1} lvl";
+
 	//newUser(); 
 	$lang['NewUser_title'] = "[CENTER][SIZE=14][COLOR=#ff0000][B]Użytkownicy, którzy dołączyli wciągu 24h.[/B][/COLOR][/SIZE][/CENTER]\n\n{1}";
 	$lang['NewUser_name'] = "[cspacer]Nowi użytkownicy ({1})";
+
+	//Points()
+	$lang['row_Points'] = "[SIZE=10][COLOR=#ff0000][B]{1}.)[/B][/COLOR] {2} {3} {4}\n[/SIZE]";
+	$lang['list_Points'] = "{1}";
 
 	//Poke();
 	$lang['error_admin_offline_poke'] = "Aktualnie nie ma administracji lub są zajęci";
@@ -76,4 +85,6 @@
 	$lang['row_TopLongestConnection'] = "[SIZE=10][COLOR=#ff0000][B]{1}.)[/B][/COLOR] {2} {3}\n[/SIZE]";
 	$lang['list_TopLongestConnection'] = "{1}";
 
+	//Visit();
+	$lang['success_Visit'] = "[cspacer8]Odwiedziło nas {1} {2}";
 ?>

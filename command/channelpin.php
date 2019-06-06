@@ -8,7 +8,13 @@
 				$this->sendMessage($invokerid, Bot::$l->error_lack_of_channel_channelpin);
 			}else{
 				$channelInfo = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->channelInfo($row['cid']));
-				$this->sendMessage($invokerid, Bot::$l->sprintf(Bot::$l->success_channel_info_channelpin, $channelInfo['channel_name'], $row['cid'], $row['cldbid'], $row['connection_client_ip']));
+				$clientInfo = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientInfo($invokerid));
+				if(array_intersect(explode(',', $clientInfo['client_servergroups']), $this->configcmd['functions_channelpin']['gid'])){
+					$lastip = Bot::$l->sprintf(Bot::$l->lastip_users_channelpin, $clientDbInfo['client_lastip']);
+				}else{
+					$lastip = NULL;
+				}
+				$this->sendMessage($invokerid, Bot::$l->sprintf(Bot::$l->success_channel_info_channelpin, $channelInfo['channel_name'], $row['cid'], $row['cldbid'], $lastip));
 			}
 		}
 	}

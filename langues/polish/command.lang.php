@@ -11,6 +11,10 @@
 	$lang['success_display_log_adminlog'] = "Ostatnie 25 akcji: {1}\n{2}";
 	$lang['error_no_logs_adminlog'] = "Brak logów dla {1} z dnia {2}";
 
+//banhistory.php
+	$lang['row_banhistory'] = "[COLOR=#FF0000]\n~~~~~~~~[/COLOR]\n[B][COLOR=#A52A2A]ID:[/COLOR][/B] [COLOR=#2d2626]{1}[/COLOR]\n[B][COLOR=#A52A2A]IP:[/COLOR][/B] [COLOR=#2d2626]{2}[/COLOR]\n[B][COLOR=#A52A2A]UID:[/COLOR][/B] [COLOR=#2d2626]{3}[/COLOR]\n[B][COLOR=#A52A2A]CLDBID:[/COLOR][/B] [COLOR=#2d2626]{4}[/COLOR]\n[B][COLOR=#A52A2A]Ostani nick:[/COLOR][/B] [COLOR=#2d2626]{5}[/COLOR]\n[B][COLOR=#A52A2A]Ban od:[/COLOR][/B] [COLOR=#2d2626]{6}[/COLOR]\n[B][COLOR=#A52A2A]Ban do:[/COLOR][/B] [COLOR=#2d2626]{7}[/COLOR]\n[B][COLOR=#A52A2A]Powód:[/COLOR][/B] [COLOR=#2d2626]{8}[/COLOR]\n[B][COLOR=#A52A2A]Bana nadał:[/COLOR][/B] [COLOR=#2d2626]{9}[/COLOR]";
+	$lang['error_give_cldbid_banhistory'] = "Podaj IP lub UID lub CLDBID.";
+
 //channelowner.php
 	$lang['error_channel_provided_unoccupied_channelowner'] = "Podany kanał jest wolny.";
 	$lang['success_owner_changed_channelowner'] = "Właściciel kanału o ID:{1} został zmieniony na:{2}";
@@ -22,7 +26,8 @@
 //channelpin.php
 	$lang['error_give_pin_channelpin'] = "Podaj PIN.";
 	$lang['error_lack_of_channel_channelpin'] = "Nie znaleziono kanału dla podanego pinu.";
-	$lang['success_channel_info_channelpin'] = "[b][COLOR=#A52A2A]Nazwa kanału:[/COLOR][/b] [COLOR=#3d3b3b]{1}[/COLOR]\n[b][COLOR=#A52A2A]ID Kanału:[/COLOR][/b] [COLOR=#3d3b3b]{2}[/COLOR]\n[b][COLOR=#A52A2A]DBID Właściciela:[/COLOR][/b] [COLOR=#3d3b3b]{3}[/COLOR]\n[b][COLOR=#A52A2A]IP Właściciela:[/COLOR][/b] [COLOR=#3d3b3b]{4}[/COLOR]";
+	$lang['lastip_users_channelpin'] = "\n[b][COLOR=#A52A2A]IP Właściciela:[/COLOR][/b] [COLOR=#3d3b3b]{1}[/COLOR]";
+	$lang['success_channel_info_channelpin'] = "[b][COLOR=#A52A2A]Nazwa kanału:[/COLOR][/b] [COLOR=#3d3b3b]{1}[/COLOR]\n[b][COLOR=#A52A2A]ID Kanału:[/COLOR][/b] [COLOR=#3d3b3b]{2}[/COLOR]\n[b][COLOR=#A52A2A]DBID Właściciela:[/COLOR][/b] [COLOR=#3d3b3b]{3}[/COLOR]{4}";
 
 //delcmd.php
 	$lang['error_give_name_cmd_delcmd'] = "Podaj nazwę komendy.";
@@ -34,6 +39,13 @@
 	$lang['error_no_number_delgroup'] = "ID musi być liczbą.";
 	$lang['row_group_delgroup'] = "{1} ID: ({2})\n";
 	$lang['error_give_id_delgroup'] = "Podaj ID Grupy którą chcesz usunać.\nGrupy które możewsz usunąć\n{1}";
+
+//gamble.php
+	$lang['error_give_points_gamble'] = "Podaj liczbę lub all jeżeli chcesz postawić wszystkie punkty.";
+	$lang['success_defea_all_gamble'] = "Postawiłeś wszystkie punkty i przegrałeś :)";
+	$lang['success_defea_gamble'] = "Właśnie przegrałeś {1} punktów";
+	$lang['success_win_gamble'] = "Gratulacje wygrałeś {1} punktów";
+	$lang['error_no_points_gamble'] = "Nie masz wystarczająco punktów";
 
 //givegroup.php
 	$lang['success_add_group_givegroup'] = "Grupa została przyznana.";

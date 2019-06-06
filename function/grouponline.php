@@ -33,7 +33,7 @@
 										}else{
 											$channel = NULL;
 										}
-										$nick = $this->bot->getUrlName($cl['client_database_id'], $cl['client_unique_identifier'], $cl['client_nickname']);
+										$nick = $this->bot->getUrlName($cl['client_database_id'], $cl['client_unique_identifier'] ?? '', $cl['client_nickname']);
 										$channel_description .= self::$l->sprintf(self::$l->GroupOnline_online, $nick, $channel);
 										$groupOnline .= $nick.$channel;
 										break;

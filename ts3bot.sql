@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Czas generowania: 10 Kwi 2019, 02:44
--- Wersja serwera: 8.0.15
--- Wersja PHP: 7.3.2-3+0~20190208150725.31+stretch~1.gbp0912bd
+-- Host: 127.0.0.1
+-- Czas generowania: 06 Cze 2019, 01:44
+-- Wersja serwera: 10.1.38-MariaDB
+-- Wersja PHP: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,6 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `banhistory`
+--
+
+CREATE TABLE `banhistory` (
+  `id` int(255) NOT NULL,
+  `banid` int(255) NOT NULL DEFAULT '0',
+  `ip` varchar(100) NOT NULL DEFAULT '',
+  `uid` varchar(30) NOT NULL DEFAULT '',
+  `cldbid` int(255) NOT NULL DEFAULT '0',
+  `lastnickname` varchar(50) NOT NULL DEFAULT '',
+  `created` int(100) NOT NULL DEFAULT '0',
+  `duration` int(100) NOT NULL DEFAULT '0',
+  `invokername` varchar(50) NOT NULL DEFAULT '',
+  `invokercldbid` int(255) NOT NULL DEFAULT '0',
+  `invokeruid` varchar(100) NOT NULL DEFAULT '',
+  `reason` varchar(5000) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `channel`
 --
 
@@ -32,9 +53,9 @@ CREATE TABLE `channel` (
   `id` int(255) NOT NULL,
   `cldbid` int(255) NOT NULL DEFAULT '0',
   `cid` int(255) NOT NULL DEFAULT '0',
-  `connection_client_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `pin` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `connection_client_ip` varchar(255) NOT NULL DEFAULT '',
+  `pin` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -44,13 +65,13 @@ CREATE TABLE `channel` (
 
 CREATE TABLE `command` (
   `id` int(255) NOT NULL,
-  `cmd` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `alias` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `cmd` varchar(100) NOT NULL DEFAULT '',
+  `alias` varchar(100) NOT NULL DEFAULT '',
   `staff` int(10) NOT NULL DEFAULT '0',
-  `group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `syntax` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `group` varchar(255) NOT NULL DEFAULT '',
+  `description` varchar(5000) NOT NULL DEFAULT '',
+  `syntax` varchar(1000) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `command`
@@ -69,7 +90,10 @@ INSERT INTO `command` (`id`, `cmd`, `alias`, `staff`, `group`, `description`, `s
 (10, 'addcmd', 'ac', 10, '', 'Komenda dodaje komendy tekstowe do bota', '!addcmd komenda treść'),
 (11, 'givegroup', 'gg', 0, '', 'Nadaje podaną grupę.', '!givegroup id_grup'),
 (12, 'delgroup', 'dg', 0, '', 'Usuwa podaną grupe.', '!delgroup id_grup'),
-(13, 'adminlog', 'ac', 10, '', 'Komenda wyświetla logi administratora', '!adminlog cdbid/cuid data');
+(13, 'adminlog', 'ac', 10, '', 'Komenda wyświetla logi administratora', '!adminlog cdbid/cuid data'),
+(14, 'banhistory', 'bh', 10, '', 'Komenda wyświetla historię banów', '!banhistory ip/uid/cldbid'),
+(15, 'gamble', 'gb', 0, '', 'Komenda pozwala obstawić punkty', '!gamble ilość_pkt|all'),
+(16, 'punkty', 'pkt', 0, '', 'Komenda pozwala sprawdzić ilość punktów', '!punkty');
 
 -- --------------------------------------------------------
 
@@ -79,14 +103,14 @@ INSERT INTO `command` (`id`, `cmd`, `alias`, `staff`, `group`, `description`, `s
 
 CREATE TABLE `command_txt` (
   `id` int(255) NOT NULL,
-  `cmd` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `alias` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `text` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `cmd` varchar(100) NOT NULL DEFAULT '',
+  `alias` varchar(100) NOT NULL DEFAULT '',
+  `text` varchar(5000) NOT NULL DEFAULT '',
   `staff` int(10) NOT NULL DEFAULT '0',
-  `group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `syntax` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `group` varchar(255) NOT NULL DEFAULT '',
+  `description` varchar(5000) NOT NULL DEFAULT '',
+  `syntax` varchar(1000) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -96,10 +120,10 @@ CREATE TABLE `command_txt` (
 
 CREATE TABLE `ip` (
   `id` int(11) NOT NULL,
-  `ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `ip` varchar(255) NOT NULL DEFAULT '',
   `proxy` int(1) NOT NULL DEFAULT '0',
   `time` int(255) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `ip`
@@ -117,27 +141,36 @@ INSERT INTO `ip` (`id`, `ip`, `proxy`, `time`) VALUES
 CREATE TABLE `users` (
   `id` int(255) NOT NULL,
   `cldbid` int(255) NOT NULL DEFAULT '0',
-  `client_nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
-  `cui` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `client_nickname` varchar(255) NOT NULL DEFAULT '',
+  `cui` varchar(255) NOT NULL DEFAULT '',
   `longest_connection` int(255) NOT NULL DEFAULT '0',
   `connections` int(255) NOT NULL DEFAULT '0',
   `time_activity` int(255) NOT NULL DEFAULT '0',
   `last_activity` int(255) NOT NULL DEFAULT '0',
+  `lvl` int(10) NOT NULL DEFAULT '1',
+  `exp` float NOT NULL DEFAULT '0',
+  `pkt` int(255) NOT NULL DEFAULT '0',
   `regdate` int(25) NOT NULL DEFAULT '0',
-  `gid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `gid` varchar(255) NOT NULL DEFAULT '',
   `staff` int(25) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Zrzut danych tabeli `users`
 --
 
-INSERT INTO `users` (`id`, `cldbid`, `client_nickname`, `cui`, `longest_connection`, `connections`, `time_activity`, `last_activity`, `regdate`, `gid`, `staff`) VALUES
-(1, 1, 'serveradmin', 'serveradmin', 0, 0, 0, 0, 0, '1', 0);
+INSERT INTO `users` (`id`, `cldbid`, `client_nickname`, `cui`, `longest_connection`, `connections`, `time_activity`, `last_activity`, `lvl`, `exp`, `pkt`, `regdate`, `gid`, `staff`) VALUES
+(1, 1, 'serveradmin', 'serveradmin', 0, 0, 0, 0, 1, 0, 0, 0, '1', 0);
 
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `banhistory`
+--
+ALTER TABLE `banhistory`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeksy dla tabeli `channel`
@@ -183,7 +216,7 @@ ALTER TABLE `channel`
 -- AUTO_INCREMENT dla tabeli `command`
 --
 ALTER TABLE `command`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT dla tabeli `command_txt`

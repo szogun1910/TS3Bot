@@ -66,9 +66,6 @@
 				$nick = $this->getUrlName($row['cldbid'], $row['cui'], $row['client_nickname']);
 			}
 			if($count != 0){
-				$clientGetDbIdFromUid = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientGetDbIdFromUid($invokeruid));
-				$cldbid = $clientGetDbIdFromUid['cldbid'];
-
 				if(!empty($this->config['functions_TopActivityTime']['cldbid'])){
 					$cldbid_config = implode(",", $this->config['functions_TopActivityTime']['cldbid']);
 				}

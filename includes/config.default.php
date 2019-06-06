@@ -24,7 +24,7 @@
 
 		'bot' => [
 		
-			'ver'		=> '400'	//Wersja bota.	
+			'ver'		=> '410'	//Wersja bota.	
 		
 		],
 
@@ -76,6 +76,12 @@
 			'key'		=> 'MzMyMTptb25ad0p5U05jRHBKZG4ySXlOOE5iYXQxdGpIQnB3Rw=='	//Klucz do API można go uzyskać na stronie https://iphub.info/pricing
 		],
 
+	//BanHistory() Funkcja zapisuje bany.
+		'functions_BanHistory' => [
+			'on'		=> false,	//true - włączona false - wyłączonav.
+			'inst'		=> 1, //ID Instancji 
+		],
+
 	//BanList() Funkcja ustawia listę banów w opisie kanału o podanym ID.
 		'functions_BanList' => [
 			'on'		=> false,	//true - włączona false - wyłączonav.
@@ -84,7 +90,7 @@
 			'limit'		=> 2	//Limit banów.
 		],
 
-		//ChannelCreate() Funkcja zakłada kanały w podanym sektorze.
+	//ChannelCreate() Funkcja zakłada kanały w podanym sektorze.
 		'functions_ChannelCreate' => [
 			'on'		=> false,	//true - włączona false - wyłączona
 			'inst'	=> 1, //ID Instancji 
@@ -121,7 +127,7 @@
 			'separator'		=> '. '	//Separator oddzielający nazwę kanału od numeru.
 		],
 
-		//ChannelNumber() Funkcja sprawdza i w razie, czego poprawia numer kanału.
+	//ChannelNumber() Funkcja sprawdza i w razie, czego poprawia numer kanału.
 		'functions_ChannelNumber' => [
 			'on'			=> false,	//true - włączona false - wyłączona
 			'inst'			=> 1, //ID Instancji 
@@ -129,7 +135,7 @@
 			'separator'		=> '. '	//Separator oddzielający nazwę kanału od numeru.
 		],
 
-		//CleanChannel() Funkcja czyści kanały, które nie są aktywne dłużej niż x dni w podanym sektorze.
+	//CleanChannel() Funkcja czyści kanały, które nie są aktywne dłużej niż x dni w podanym sektorze.
 		'functions_CleanChannel' => [
 			'on'	=> false,	//true - włączona false - wyłączona
 			'inst'	=> 1, //ID Instancji 
@@ -137,7 +143,7 @@
 			'time'	=> 7	//Czas w dniach, po którym ma usuwać kanał.
 		],
 
-		//ClearImg() Funkcja ususwa niebezpieczne lini z IMG.
+	//ClearImg() Funkcja ususwa niebezpieczne lini z IMG.
 		'functions_ClearImg' => [
 			'on'		=> false,	//true - włączona false - wyłączona.
 			'inst'		=> 1, //ID Instancji 
@@ -149,7 +155,7 @@
 			]	//Lista dostępnych domen.
 		],
 
-		//DelInfoChannel() Funkcja ustawia w opisie kanału listę kanałów które zostana usunięte w najbliższym czasie.
+	//DelInfoChannel() Funkcja ustawia w opisie kanału listę kanałów które zostana usunięte w najbliższym czasie.
 		'functions_DelInfoChannel' => [
 			'on'		=> false,	//true - włączona false - wyłączona
 			'inst'		=> 1, //ID Instancji 
@@ -159,7 +165,7 @@
 			'counter'	=> 1	//Czy ma zmieniać nazwę kanału i ustawiać liczbę nieaktywnych kanałów 1 - tak 0 - nie.
 		],
 
-		//DelPermissions() Funkcja sprawdza i w razie, czego poprawia numer kanału.
+	//DelPermissions() Funkcja sprawdza i w razie, czego poprawia numer kanału.
 		'functions_DelPermissions' => [
 			'on'		=> false,	//true - włączona false - wyłączona
 			'inst'		=> 1, //ID Instancji 
@@ -199,6 +205,35 @@
 				]
 			]
 		],
+
+	//Lvl() Funkcja .
+	'functions_Lvl' => [
+		'on'	=> false,	//true - włączona false - wyłączona
+		'inst'	=> 2, //ID Instancji 
+		'lvl'	=> [
+			1 => ['exp' => 0, 'gid' => 1],
+			2 => ['exp' => 100, 'gid' => 1],
+			3 => ['exp' => 200, 'gid' => 1],
+			4 => ['exp' => 300, 'gid' => 1],
+			5 => ['exp' => 500, 'gid' => 1],
+			6 => ['exp' => 800, 'gid' => 1],
+			7 => ['exp' => 1300, 'gid' => 1],
+			8 => ['exp' => 2100, 'gid' => 1],
+			9 => ['exp' => 3400, 'gid' => 1],
+			10 => ['exp' => 5500, 'gid' => 1],
+			11 => ['exp' => 8900, 'gid' => 1],
+		],//	Lvl wymagany exp oraz ID grupy, która ma nadać.
+		'group' => true,	//Czy ma nadawać grupę true - tak false -nie.
+		'top_list' => true,	//Czy ma ustawiać TOP w opisie kanału.
+		'cid' => 1,	//ID kanału gdzie ma wyświetlać top.
+		'gid'		=> [
+			1, 2
+		],	//ID grupy, której ma nie wyświetlać w topce.
+		'cldbid'	=> [
+			1, 2, 3
+		],	//Client database id użytkowników, których ma nie wyświetlać w topce np. MusicBOT czy też ten bot.
+		'limit'		=> 20	//Limit osób, które ma wyświetlać w top.
+	],
 
 	//limitIP() Funkcja wyrzuca użytkowników, jeżeli osiągną limit połączeń z tego samego IP.
 		'functions_LimitIP' => [
@@ -279,7 +314,7 @@
 			'user_time'			=> 120
 		],
 
-		//Register() Funkcja automatycznie rejestruje użytkownika gdy on wbije na podane id kanału.
+	//Register() Funkcja automatycznie rejestruje użytkownika gdy on wbije na podane id kanału.
 		'functions_Register' => [
 			'on'	=> false,	//true - włączona false - wyłączona
 			'inst'	=> 1, //ID Instancji 
@@ -289,7 +324,7 @@
 			'cidk'	=> 5	//ID kanału zarejestrowanej.
 		],
 
-		//RekordOnline() Funkcja ustawia rekord osób online jako nazwa kanału o podanym ID.
+	//RekordOnline() Funkcja ustawia rekord osób online jako nazwa kanału o podanym ID.
 		'functions_RekordOnline' => [
 			'on'		=> false,	//true - włączona false - wyłączona
 			'inst'		=> 2, //ID Instancji 
@@ -297,7 +332,7 @@
 			'format'	=> 'd.m.Y H:i:s'	//Format daty.
 		],
 
-		//SendAd() Funkcja wysyła losową wiadomość na serwerze co określony czas.
+	//SendAd() Funkcja wysyła losową wiadomość na serwerze co określony czas.
 		'functions_SendAd' => [
 			'on'			=> false,	//true - włączona false - wyłączona.
 			'inst'			=> 1, //ID Instancji 
@@ -343,8 +378,11 @@
 			'on'		=> false,	//true - włączona false - wyłączona
 			'inst'		=> 2, //ID Instancji 
 			'cid_name'	=> [
-				1 => 'pago3'
-			]	//ID kanału oraz nick na twitch.tv
+				1 => [	//ID kanału w którym ma ustawiać opis oraz nazwę.
+					'users' => 'kayser',	//Nick osoby na twitchu.
+					'channel_name' => '[cspacer8] Stream Mrs_dinocorn {1}'//Nazwa kanału jaką ma ustawiać {1} jest zamienianę na online lub offline.
+				]
+			]
 
 		],
 		
@@ -386,7 +424,7 @@
 			'limit'		=> 20	//Limit osób, które ma wyświetlać w top.
 		],
 
-		//TopLongestConnection() Funkcja ustawia w opisie kanału o podanym ID TOP 10 połączeń z serwerem.
+	//TopLongestConnection() Funkcja ustawia w opisie kanału o podanym ID TOP 10 połączeń z serwerem.
 		'functions_TopLongestConnection' => [
 			'on'		=> false,	//true - włączona false - wyłączona
 			'inst'	=> 	2, //ID Instancji 
@@ -398,6 +436,13 @@
 				1, 4, 5, 6, 7
 			],	//Client database id użytkowników, których ma nie wyświetlać w topce np. MusicBOT czy też ten bot.
 			'limit'		=> 20	//Limit osób, które ma wyświetlać w top.
+		],
+	
+	//Visit() Funkcja ustawia rekord osób online jako nazwa kanału o podanym ID.
+		'functions_Visit' => [
+			'on'		=> false,	//true - włączona false - wyłączona
+			'inst'		=> 2, //ID Instancji 
+			'cid'		=> 1,	//ID kanału, na którym ma ustawiać liczbe osób odwiedzających.
 		],
 
 	//WelcomeMessege() Funkcja wysyła wiadomość powitalną.

@@ -10,16 +10,26 @@
 
 		'admin' => [
 
-            'uid'		=> '0ycSJ9zGGGSGSGSfnlmbtLwgA='				//UID Admina
+            'uid'		=> '0ycSJ9zGGGSGSGSfnlmbtLwgA='	//UID Admina
 
 		],
 
 		'functions_channelOwner' => [
 
-			'gid'		=> 1		//ID Grupy.
+			'gid'		=> 1	//ID Grupy.
 
 		],
 
+		'functions_channelpin' => [
+
+			'gid'	=>	[
+
+				1	//ID Grup które mają dostęp do IP.
+
+			]
+
+		],
+	
 		'functions_givegroup' => [
 
 			'global_limit'  => 7,
