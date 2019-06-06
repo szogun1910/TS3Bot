@@ -1,5 +1,5 @@
 # Changelog
-## [4.1.0] - 05.04.2018
+## [4.1.0] - 06.06.2019
 * Dodanie funkcji banhistory(), która zapisuje w bazie wszystkie bany co pozwala sprawdzić komendą !banhistory czy użytkownik o podanym DBID lub UID miał wcześniej bana.
 * Dodanie funkcji lvl(), która pozwala zdobywać exp oraz awansować na wyższy lvl. Bot może też nadawać rangi po wbiciu lvl.
 * Dodanie funkcji points(), która pozwala zdobywać punkty za siedzenie na ts. Punkami można sprawdzić za pomocą komendy !points oraz można nimi grać za pomocą komendy !gamble.
@@ -9,7 +9,7 @@
 
 Aktualizacja wymaga ponownego konfigurowania bota lub dodanie brakujących opcji w configu oraz wykonania pliku update2.php jeżeli aktualizujesz bota z poprzedniej wersjiv.
 
-## [4.0.0] - 05.04.2018
+## [4.0.0] - 05.04.2019
 * Przebudowa silnika.
 * Przejście z sqlite na MySql.
 * Dodanie funkcji adminLog(), która zapisuje logi podanych grup.
