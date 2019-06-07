@@ -32,7 +32,7 @@
 					}
 					self::$top_activity_time = time()+60;
 				} catch (PDOException $e) {
-					$this->log(1, $e->getMessage());
+					$this->bot->log(1, $e->getMessage());
 				}
 			}
 		}

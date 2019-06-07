@@ -31,7 +31,7 @@
 					self::$description_TopConnections = $top;
 				}
 			} catch (PDOException $e) {
-				$this->log(1, $e->getMessage());
+				$this->bot->log(1, $e->getMessage());
 			}
 		}
 	}

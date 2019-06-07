@@ -36,7 +36,7 @@
 					}
 					self::$edit_TopLongestConnection = time()+300;
 				} catch (PDOException $e) {
-					$this->log(1, $e->getMessage());
+					$this->bot->log(1, $e->getMessage());
 				}
 			}
 		}
