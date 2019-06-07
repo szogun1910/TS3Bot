@@ -24,7 +24,7 @@
 
 		'bot' => [
 		
-			'ver'		=> '410'	//Wersja bota.	
+			'ver'		=> '411'	//Wersja bota.	
 		
 		],
 
@@ -222,8 +222,18 @@
 			9 => ['exp' => 3400, 'gid' => 1],
 			10 => ['exp' => 5500, 'gid' => 1],
 			11 => ['exp' => 8900, 'gid' => 1],
+			12 => ['exp' => 14400, 'gid' => 1],
+			13 => ['exp' => 23300, 'gid' => 1],
+			14 => ['exp' => 37700, 'gid' => 1],
+			15 => ['exp' => 61000, 'gid' => 1],
+			16 => ['exp' => 98700, 'gid' => 1],
+			17 => ['exp' => 159700, 'gid' => 1],
+			18 => ['exp' => 258400, 'gid' => 1],
+			19 => ['exp' => 418100, 'gid' => 1],
+			20 => ['exp' => 676500, 'gid' => 1]
 		],//	Lvl wymagany exp oraz ID grupy, która ma nadać.
 		'group' => true,	//Czy ma nadawać grupę true - tak false -nie.
+		'required_group' => [1, 2],	//Wymagana ranga żeby dostać rangę lvl.
 		'top_list' => true,	//Czy ma ustawiać TOP w opisie kanału.
 		'cid' => 1,	//ID kanału gdzie ma wyświetlać top.
 		'gid'		=> [
