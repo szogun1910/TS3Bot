@@ -1,7 +1,10 @@
 # Changelog
+<<<<<<< HEAD
 ## [4.1.1] - 06.06.2019
 * Drobne poprawki w funkcji lvl() od teraz można podać wymaganą grupę jaką trzeba mieć, żeby dostać grupę LVL np. Zarejestrowany/Zarejestrowana.
 
+=======
+>>>>>>> be01d110ae82e7c0a60a9a04fbdb509f35170141
 ## [4.1.0] - 06.06.2019
 * Dodanie funkcji banhistory(), która zapisuje w bazie wszystkie bany co pozwala sprawdzić komendą !banhistory czy użytkownik o podanym DBID lub UID miał wcześniej bana.
 * Dodanie funkcji lvl(), która pozwala zdobywać exp oraz awansować na wyższy lvl. Bot może też nadawać rangi po wbiciu lvl.
@@ -10,7 +13,7 @@
 * Dodatkowo poprawiona została funkcja statusTwitch() oraz dodano możliwość ustawienia w nazwię czy strim jest online czy też offline.
 * Poprawienie kilku drobnych błędów.
 
-Aktualizacja wymaga ponownego konfigurowania bota lub dodanie brakujących opcji w configu oraz wykonania pliku update2.php jeżeli aktualizujesz bota z poprzedniej wersjiv.
+Aktualizacja wymaga ponownego konfigurowania bota lub dodanie brakujących opcji w configu oraz wykonania pliku update2.php jeżeli aktualizujesz bota z poprzedniej wersji.
 
 ## [4.0.0] - 05.04.2019
 * Przebudowa silnika.
