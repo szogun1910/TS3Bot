@@ -390,7 +390,7 @@
 			'cid_name'	=> [
 				1 => [	//ID kanału w którym ma ustawiać opis oraz nazwę.
 					'users' => 'kayser',	//Nick osoby na twitchu.
-					'channel_name' => '[cspacer8] Stream Mrs_dinocorn {1}'//Nazwa kanału jaką ma ustawiać {1} jest zamienianę na online lub offline.
+					'channel_name' => '[cspacer8] Stream kayser {1}'//Nazwa kanału jaką ma ustawiać {1} jest zamienianę na online lub offline.
 				]
 			]
 

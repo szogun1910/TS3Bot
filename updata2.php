@@ -14,7 +14,7 @@
 	$db->beginTransaction();
 	echo "Tworzenie tabeli `banhistory`\n";
 	$db->query("CREATE TABLE `banhistory` (
-		`id` int(255) NOT NULL,
+		`id` int(255) NOT NULL AUTO_INCREMENT,
 		`banid` int(255) NOT NULL DEFAULT '0',
 		`ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
 		`uid` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',

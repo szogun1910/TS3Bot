@@ -71,7 +71,7 @@
 
 	//StatusYt()
 	$lang['channel_description_StatusYt'] = "[center][img]{6}[/img][/center]\n[size=14][color=#ff0000]Nazwa:[/color] [URL=https://www.youtube.com/channel/{1}]{2}[/URL]\n[color=#ff0000]Subskrypcji:[/color] {3}\n[color=#ff0000]Wyświetlenia:[/color] {4}\n[color=#ff0000]Opis:[/color] {5}[/size]";
-	$lang['channel_name_StatusYt'] = "{1} ({2})";
+	$lang['channel_name_StatusYt'] = "[cspacer]{1} ({2})";
 
 	//TopActivityTime()
 	$lang['row_TopActivityTime'] = "[SIZE=10][COLOR=#ff0000][B]{1}.)[/B][/COLOR] {2} {3}\n[/SIZE]";
