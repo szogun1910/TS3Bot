@@ -1,11 +1,10 @@
 # Changelog
-<<<<<<< HEAD
-## [4.1.1] - 06.06.2019
-* Drobne poprawki w funkcji lvl() od teraz można podać wymaganą grupę jaką trzeba mieć, żeby dostać grupę LVL np. Zarejestrowany/Zarejestrowana.
+## [4.1.2] - 15.09.2019
+* Naprawa kilku błędów
+* Od teraz w większości komend zamiast dbid lub uid można podać nick ( żeby nick zadziałał osoba ta musi być online i jeżeli nick osoby składa się z kilku członów należy go podać w "" przykładowo "Andrzej Grabowski"
+* Dodałem komendę !give która pozwala przekazać monety
 
-=======
->>>>>>> be01d110ae82e7c0a60a9a04fbdb509f35170141
-## [4.1.0] - 06.06.2019
+## [4.1.1] - 06.06.2019
 * Dodanie funkcji banhistory(), która zapisuje w bazie wszystkie bany co pozwala sprawdzić komendą !banhistory czy użytkownik o podanym DBID lub UID miał wcześniej bana.
 * Dodanie funkcji lvl(), która pozwala zdobywać exp oraz awansować na wyższy lvl. Bot może też nadawać rangi po wbiciu lvl.
 * Dodanie funkcji points(), która pozwala zdobywać punkty za siedzenie na ts. Punkami można sprawdzić za pomocą komendy !punkty oraz można nimi grać za pomocą komendy !gamble.
