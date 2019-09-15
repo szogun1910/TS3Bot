@@ -24,7 +24,7 @@
 
 		'bot' => [
 		
-			'ver'		=> '411'	//Wersja bota.	
+			'ver'	=> '411'	//Wersja bota.	
 		
 		],
 
@@ -295,9 +295,9 @@
 					'info_user'			=> 1,	//Czy ma informować graczy za pomocą poke czy msg.
 					'cidafk'			=> [ 4, 5 ],	//ID kanałów AFK, które wykluczają admina z poke
 					'anty_gid'			=> [ 6 ],	//ID grup, które wykluczają admina z poke.
-					'input_muted'		=> 1,	//Czy ma przenosić za wyłączony mikrofon.
-					'output_muted'		=> 1,	//Czy ma przenosić za wyłączony głośnik.
-					'away'				=> 1,	//Czy ma przenosić za włączenie statusu AFK.
+					'input_muted'		=> 1,	//Czy ma pukać, gdy admin ma wyłączony mikrofon.
+					'output_muted'		=> 1,	//Czy ma pukać, gdy admin ma wyłączony głośnik.
+					'away'				=> 1,	//Czy pukać, gdy admin ma wyłączony statusu AFK.
 				],
 				2 => [
 					'gid'				=> [ 1, 2, 3 ],
@@ -305,9 +305,9 @@
 					'info_user'			=> 1,
 					'cidafk'			=> [ 4, 5 ],
 					'anty_gid'			=> [ 6 ],
-					'input_muted'		=> 1,	//Czy ma przenosić za wyłączony mikrofon.
-					'output_muted'		=> 1,	//Czy ma przenosić za wyłączony głośnik.
-					'away'				=> 1,	//Czy ma przenosić za włączenie statusu AFK.
+					'input_muted'		=> 1,	//Czy pukać, gdy admin ma wyłączony mikrofon.
+					'output_muted'		=> 1,	//Czy pukać, gdy admin ma wyłączony głośnik.
+					'away'				=> 1,	//Czy pukać, gdy admin ma wyłączony statusu AFK.
 				],
 				3 => [
 					'gid'				=> [ 1, 2, 3 ],
@@ -315,9 +315,9 @@
 					'info_user'			=> 1,
 					'cidafk'			=> [ 4, 5 ],
 					'anty_gid'			=> [ 6 ],
-					'input_muted'		=> 1,	//Czy ma przenosić za wyłączony mikrofon.
-					'output_muted'		=> 1,	//Czy ma przenosić za wyłączony głośnik.
-					'away'				=> 1,	//Czy ma przenosić za włączenie statusu AFK.
+					'input_muted'		=> 1,	//Czy mpukać, gdy admin ma wyłączony mikrofon.
+					'output_muted'		=> 1,	//Czy pukać, gdy admin ma wyłączony głośnik.
+					'away'				=> 1,	//Czy pukać, gdy admin ma wyłączony statusu AFK.
 				]
 			],
 			'admin_time'		=> 120,
@@ -390,7 +390,7 @@
 			'cid_name'	=> [
 				1 => [	//ID kanału w którym ma ustawiać opis oraz nazwę.
 					'users' => 'kayser',	//Nick osoby na twitchu.
-					'channel_name' => '[cspacer8] Stream kayser {1}'//Nazwa kanału jaką ma ustawiać {1} jest zamienianę na online lub offline.
+					'channel_name' => '[cspacer8] Stream kayserv {1}'//Nazwa kanału jaką ma ustawiać {1} jest zamienianę na online lub offline.
 				]
 			]
 

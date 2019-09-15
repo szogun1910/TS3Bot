@@ -18,15 +18,18 @@
 			$params = [ 'text' => $wiadomosci ];
 			$params = http_build_query($params);
 			try {
-				$jdc = json_decode($this->file_get_contents_curl('http://51.254.119.80/api/api.php?'.$params));
-				if(mb_strlen($jdc->text, 'utf8') > 1024){
-					$odpowiedzword = wordwrap($jdc->text, 1024, "[podziel]", true);
-					$odp_exp = explode('[podziel]', $odpowiedzword);
-					foreach($odp_exp as $odp){
-						Bot::$tsAdmin->sendMessage(1, $invokerid, $odp);
+				$jdc = json_decode($this->file_get_contents_curl('http://51.254.119.80/api/api2.php?'.$params));
+				foreach($jdc->text as $text){
+					if(mb_strlen($text, 'utf8') > 1024){
+						$odpowiedzword = wordwrap($text, 1024, "[podziel]", true);
+						$odp_exp = explode('[podziel]', $odpowiedzword);
+						foreach($odp_exp as $odp){
+							Bot::$tsAdmin->sendMessage(1, $invokerid, $odp);
+						}
+					}else{
+						Bot::$tsAdmin->sendMessage(1, $invokerid, $text);
 					}
-				}else{
-					Bot::$tsAdmin->sendMessage(1, $invokerid, $jdc->text);
+					sleep(rand(1,2));
 				}
 			} catch (PDOException $e) {
 				Bot::$tsAdmin->sendMessage(1, $invokerid, "Napisz !help aby uzyskać listę komend:)");
@@ -183,6 +186,36 @@
 			$data = curl_exec($ch);
 			curl_close($ch);
 			return $data;
+		}
+
+		public function getDbid($msg): array
+		{
+			if(is_numeric($msg[1])){
+				return $msg;
+			}
+			if(substr($msg[1],-1) == '='){
+				$clientGetDbIdFromUid = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientGetDbIdFromUid($msg[1]));
+				if(!empty($clientGetDbIdFromUid)){
+					$msg[1] = $clientGetDbIdFromUid['cldbid'];
+					return $msg;
+				}
+			}
+			$implode = implode(' ', $msg);
+			if(preg_match_all('/(\"|\')(.*)(\"|\')/m', $implode, $matches, PREG_SET_ORDER, 0)){
+				foreach(Bot::getClientList() as $cl){
+					if(mb_strtolower($cl['client_nickname'], "UTF-8") == mb_strtolower($matches[0][2], "UTF-8")){
+						$implode = str_replace($matches[0][0], $cl['client_database_id'], $implode);
+						return explode(' ', $implode);
+					}
+				}
+			}
+			foreach(Bot::getClientList() as $cl){
+				if(mb_strtolower($cl['client_nickname'], "UTF-8") == mb_strtolower($msg[1], "UTF-8")){
+					$msg[1] = $cl['client_database_id'];
+					return $msg;
+				}
+			}
+			return [];
 		}
 
 		/**

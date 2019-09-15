@@ -2,17 +2,11 @@
 	if(empty($msg[1])){
 		$this->sendMessage($invokerid, Bot::$l->error_give_clidbid_userinfo);
 	}else{
-		if(is_numeric($msg[1])){
-			$cldbid = $msg[1];
-		}else{
-			$clientGetDbIdFromUid = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientGetDbIdFromUid($msg[1]));
-			if(!empty($clientGetDbIdFromUid)){
-				$cldbid = $clientGetDbIdFromUid['cldbid'];
-			}
-		}
-		if(empty($cldbid)){
+		$msg = $this->getDbid($msg);
+		if(empty($msg)){
 			$this->sendMessage($invokerid, $l->error_lack_of_cldbid_userinfo);
 		}else{
+			$cldbid = $msg[1];
 			$clientDbInfo = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientDbInfo($cldbid));
 			$serverGroupsByClientID = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->serverGroupsByClientID($cldbid));
 			foreach($serverGroupsByClientID as $sgbcid){

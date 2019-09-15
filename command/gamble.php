@@ -51,6 +51,6 @@
 			
 		}
 	}else{
-		$this->sendMessage($invokerid, Bot::$l->error_give_points_gamble);						
+		$this->sendMessage($invokerid, Bot::$l->error_give_points_gamble);
 	}
 ?>

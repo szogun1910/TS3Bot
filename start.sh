@@ -55,6 +55,10 @@
 		text "32;01m" "Pomyslnie uruchomiono bota nr 2!"
 	}
 
+	function update {
+		php install/upgrade.php
+	}
+
 	clear
 	text "32;01m" "
  _______ _____ ____    ____        _     _             __  __       _                 
@@ -66,7 +70,9 @@
                                                 __/ |             _/ |                
                                                |___/             |__/                 
 	"
-
+	text "32;01m" "Jeżeli chcesz mnie wspomóc możesz wysłać donejta ;)
+	Paypal: https://www.paypal.me/Majcon
+	Inne płatności: https://tipanddonation.com/majcon"
 	
 	case "$1" in
 		"start")
@@ -79,6 +85,10 @@
 
 		"restart")
 			restart
+		;;
+
+		"update")
+			update
 		;;
 
 		*)

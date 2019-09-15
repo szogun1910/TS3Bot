@@ -10,6 +10,7 @@
 				$channelInfo = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->channelInfo($row['cid']));
 				$clientInfo = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientInfo($invokerid));
 				if(array_intersect(explode(',', $clientInfo['client_servergroups']), $this->configcmd['functions_channelpin']['gid'])){
+					$clientDbInfo = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientDbInfo($row['cldbid']));
 					$lastip = Bot::$l->sprintf(Bot::$l->lastip_users_channelpin, $clientDbInfo['client_lastip']);
 				}else{
 					$lastip = NULL;

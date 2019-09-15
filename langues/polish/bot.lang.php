@@ -26,7 +26,7 @@
 	//DelInfoChannel();
 	$lang['DelInfoChannel_row'] = "{1}\n";
 	$lang['DelInfoChannel_list'] = "[CENTER][B][COLOR=#55aa00]Kanałów, które zostaną usunięte w przeciągu 24h w razie braku aktywności..[/COLOR][/B][/CENTER]\r\n\r\n{1}";
-	$lang['DelInfoChannel_name'] = "Nieaktywne Kanały Prywatne {1}";
+	$lang['DelInfoChannel_name'] = " [cspacer]★ Nieaktywne Kanały ({1}) ★";
 
 	//GroupOnline(); 
 	$lang['GroupOnline_channel'] = " na kanale {1}";

@@ -47,6 +47,14 @@
 	$lang['success_win_gamble'] = "Gratulacje wygrałeś {1} punktów";
 	$lang['error_no_points_gamble'] = "Nie masz wystarczająco punktów";
 
+//give.php
+	$lang['error_give_clidbid_give'] = "Podaj cldbid lub uid";
+	$lang['error_give_points_give'] = "Podaj liczbę punktów jaką chcesz przekazać.";
+	$lang['error_lack_of_cldbid_give'] = "Podany użytkownik nie istnieje";
+	$lang['error_no_points_give'] = "Nie masz wystarczająco punktów";
+	$lang['success_you_gave_points_give'] = "Przesłałeś {1} punktów dla {2}";
+	$lang['success_gave_points_give'] = "Użytkownik {1} podarował Ci {2} punktów";
+
 //givegroup.php
 	$lang['success_add_group_givegroup'] = "Grupa została przyznana.";
 	$lang['error_limit_givegroup'] = "Osiągnąłeś już limit grup.";
@@ -55,7 +63,6 @@
 	$lang['row_group_givegroup'] = "{1} ID: ({2})\n";
 	$lang['list_group_givegroup'] = "\n[b]{1}[/b][b] Limit:[/b] {2}\n{3}";
 	$lang['title_givegroup'] = "Aby otrzymać grupę musisz podać jej ID\nDostępne grup wraz z ich limitem";
-
 
 //groupcmd.php
 	$lang['error_give_command_groupcmd'] = "Podaj komendę lub jej alias.";

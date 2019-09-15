@@ -43,7 +43,6 @@
 										if(empty($this->config['functions_Lvl']['required_group']) || array_intersect(explode(',', $cl['client_servergroups']), $this->config['functions_Lvl']['required_group'])){
 											$serverGroupAddClient = self::$tsAdmin->serverGroupAddClient($this->config['functions_Lvl']['lvl'][$nextLvl]['gid'], $cl['client_database_id']);
 											if(!empty($serverGroupAddClient['errors'][0])){
-												print_r($serverGroupAddClient);
 												$this->bot->log(1, 'Grupa o ID:'.$this->config['functions_Lvl']['lvl'][$nextLvl]['gid'].' nie istnieje Funkcja: Lvl()');
 											}
 										}
@@ -52,7 +51,7 @@
 							}
 						}
 					} catch (PDOException $e) {
-						$this->log(1, $e->getMessage());
+						$this->bot->log(1, $e->getMessage());
 					}
 					$lvl_clientlist[] = $cl['clid'];
 				}
@@ -85,7 +84,7 @@
 					}
 					self::$lvl_time = time()+60;
 				} catch (PDOException $e) {
-					$this->log(1, $e->getMessage());
+					$this->bot->log(1, $e->getMessage());
 				}
 			}
 
