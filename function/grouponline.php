@@ -43,7 +43,7 @@
 								}
 								if($online == false){
 									if($value['time_info'] == true){
-										$query = self::$db->query("SELECT COUNT(id) AS `count`, `last_activity` FROM `users` WHERE `cldbid` = {$sgcl['cldbid']} LIMIT 1");
+										$query = self::$db->query("SELECT COUNT(id) AS `count`, `last_activity` FROM `users` WHERE `cldbid` = {$sgcl['cldbid']} GROUP BY `last_activity` LIMIT 1");
 										while($row = $query->fetch()){
 											if($row['count'] != 0){
 												$last_activity = $row['last_activity'];

@@ -49,18 +49,12 @@
 		$this->sendMessage($invokerid, Bot::$l->sprintf(Bot::$l->success_info_from_stats, $connections, $cs, $time_activity, $ts, $longest_connection, $ls));
 		
 	}else{
-		if(is_numeric($msg[1])){
-			$cldbid = $msg[1];
-		}else{
-			$clientGetDbIdFromUid = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientGetDbIdFromUid($msg[1]));
-			if(!empty($clientGetDbIdFromUid)){
-				$cldbid = $clientGetDbIdFromUid['cldbid'];
-			}
-		}
-		if(empty($cldbid)){
+		$msg = $this->getDbid($msg);
+		if(empty($msg)){
 			$this->sendMessage($invokerid, 'Nie znaleziono podanego użytkownika');
 		}else{
-			$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `cldbid`, `cui`, `client_nickname` FROM `users` WHERE `cldbid` = {$cldbid}");
+			$cldbid = $msg[1];
+			$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `cldbid`, `cui`, `client_nickname` FROM `users` WHERE `cldbid` = {$cldbid} GROUP BY `id`");
 			while($row = $query->fetch()){
 				$count = $row['count'];
 				$nick = $this->getUrlName($row['cldbid'], $row['cui'], $row['client_nickname']);

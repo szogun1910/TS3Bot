@@ -18,7 +18,7 @@
 					if(!empty($value)){
 						$check = 0;
 						$proxy = 0;
-						$query = self::$db->query("SELECT COUNT(id) as `count`, `proxy`, `time` FROM `ip` WHERE `ip` = '{$value}'");
+						$query = self::$db->query("SELECT COUNT(id) as `count`, `proxy`, `time` FROM `ip` WHERE `ip` = '{$value}' GROUP BY `id`");
 						try {
 							while($row = $query->fetch()){
 								$count = $row['count'];

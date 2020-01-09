@@ -7,32 +7,32 @@
 			if(!in_array($gid, $explode)){
                 if($this->configcmd['functions_givegroup']['global_limit'] !=0){
                     $count = 0;
-                    foreach($this->configcmd['functions_givegroup']['limit'] as $limit => $value){
+                    foreach($this->configcmd['functions_givegroup']['limit'] as $value){
                         $count += count(array_intersect($explode, $value['gid']));
                     }
                     if($count < $this->configcmd['functions_givegroup']['global_limit']){
-                        foreach($this->configcmd['functions_givegroup']['limit'] as $limit => $value){
+                        foreach($this->configcmd['functions_givegroup']['limit'] as $value){
                             if(in_array($gid, $value['gid'])){
-                                if(count(array_intersect($explode, $value['gid'])) < $limit){
+                                if(count(array_intersect($explode, $value['gid'])) < $value['limit']){
                                     $serverGroupAddClient = Bot::$tsAdmin->serverGroupAddClient($gid, $clientInfo['client_database_id']);
                                     $this->sendMessage($invokerid, Bot::$l->success_add_group_givegroup);
                                 }else{
-                                    $this->sendMessage($invokerid, Bot::$l->error_limit_givegroup);
+                                    $this->sendMessage($invokerid, Bot::$l->error_limit_givegroup.count(array_intersect($explode, $value['gid']))." ".$limit);
                                 }
                                 break;
                             }
                         }
                     }else{
-                        $this->sendMessage($invokerid, Bot::$l->error_limit_givegroup);
+                        $this->sendMessage($invokerid, Bot::$l->error_limit_givegroup.'2');
                     }
                 }else{
-                    foreach($this->configcmd['functions_givegroup']['limit'] as $limit => $value){
+                    foreach($this->configcmd['functions_givegroup']['limit'] as $value){
                         if(in_array($gid, $value['gid'])){
-                            if(count(array_intersect($explode, $value['gid'])) < $limit){
+                            if(count(array_intersect($explode, $value['gid'])) < $value['limit']){
                                 $serverGroupAddClient = Bot::$tsAdmin->serverGroupAddClient($gid, $clientInfo['client_database_id']);
                                 $this->sendMessage($invokerid, Bot::$l->success_add_group_givegroup);
                             }else{
-                                $this->sendMessage($invokerid, Bot::$l->error_limit_givegroup);
+                                $this->sendMessage($invokerid, Bot::$l->error_limit_givegroup.'3');
                             }
                             break;
                         }

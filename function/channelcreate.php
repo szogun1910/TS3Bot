@@ -7,7 +7,8 @@
 			$channelClientList = self::$tsAdmin->getElement('data', self::$tsAdmin->channelClientList($this->config['functions_ChannelCreate']['cid'], "-ip -uid"));
 			if(!empty($channelClientList)){
 				foreach($channelClientList as $ccl){
-					$query = self::$db->query("SELECT COUNT(id) AS `count`, `cid` FROM `channel` WHERE `cldbid` = {$ccl['client_database_id']}");
+					$count = 0;
+					$query = self::$db->query("SELECT COUNT(id) AS `count`, `cid` FROM `channel` WHERE `cldbid` = {$ccl['client_database_id']} GROUP BY `id`");
 					while($row = $query->fetch()){
 						if($row['count'] != 0 && $row['cid'] != 0){
 							$channelInfo = self::$tsAdmin->channelInfo($row['cid']);
@@ -28,7 +29,7 @@
 						}
 					}
 					if($count == 0){
-						$query = self::$db->query("SELECT COUNT(id) AS `count` FROM `channel` WHERE `connection_client_ip` = '{$ccl['connection_client_ip']}'");
+						$query = self::$db->query("SELECT COUNT(id) AS `count` FROM `channel` WHERE `connection_client_ip` = '{$ccl['connection_client_ip']}' GROUP BY `id`");
 						while($row = $query->fetch()){
 							if($row['count'] < $this->config['functions_ChannelCreate']['limit_ip'] || $this->config['functions_ChannelCreate']['limit_ip'] == 0){
 								$limit_ip = 0;
@@ -68,7 +69,7 @@
 										self::$tsAdmin->setClientChannelGroup($this->config['functions_ChannelCreate']['gid'], $chl['cid'], $ccl['client_database_id']);
 										do {
 											$pin = substr(md5(uniqid(rand())), 0, 6);
-											$query = self::$db->query("SELECT COUNT(id) AS `count` FROM `channel` WHERE `pin` = '{$pin}'");
+											$query = self::$db->query("SELECT COUNT(id) AS `count` FROM `channel` WHERE `pin` = '{$pin}' GROUP BY `id`");
 											while($row = $query->fetch()){
 												if($row['count'] == 0){
 													$count = 0;
@@ -110,7 +111,7 @@
 								self::$tsAdmin->setClientChannelGroup($this->config['functions_ChannelCreate']['gid'], $channelCreate['data']['cid'], $ccl['client_database_id']);
 								do {
 									$pin = substr(md5(uniqid(rand())), 0, 6);
-									$query = self::$db->query("SELECT COUNT(id) AS `count` FROM `channel` WHERE `pin` = '{$pin}'");
+									$query = self::$db->query("SELECT COUNT(id) AS `count` FROM `channel` WHERE `pin` = '{$pin}' GROUP BY `id`");
 									while($row = $query->fetch()){
 										if($row['count'] == 0){
 											$count = 0;

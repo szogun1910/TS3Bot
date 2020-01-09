@@ -1,4 +1,12 @@
 # Changelog
+## [4.1.3] - 09.01.2020
+* Aktualizacja API w funkcji statusTwitch() oraz dodanie możliwości włączenia wiadomości gdy zacznie się live.
+* Naprawienie błędu z only_full_group_by.
+* Poprawka kilku innych drobnych błędów.
+Aby zaktualizować bota należy zrobić backupa, pobrać pliki, nadpisać oraz wpisać ./start.sh update
+W razie błędu przy aktualizacji należy ponowanie skonfigurować bota
+
+
 ## [4.1.2] - 15.09.2019
 * Naprawa kilku błędów
 * Od teraz w większości komend zamiast dbid lub uid można podać nick ( żeby nick zadziałał osoba ta musi być online i jeżeli nick osoby składa się z kilku członów należy go podać w "" przykładowo "Andrzej Grabowski"

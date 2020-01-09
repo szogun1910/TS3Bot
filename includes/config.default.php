@@ -24,7 +24,7 @@
 
 		'bot' => [
 		
-			'ver'	=> '411'	//Wersja bota.	
+			'ver'	=> '413'	//Wersja bota.	
 		
 		],
 
@@ -284,6 +284,21 @@
 			'counter'	=> 1	//Czy ma zmieniać nazwę kanału i ustawiać liczbę nowych użytkowników 1 - tak 0 - nie.
 		],
 
+	//Points() Funkcja zlicza punkty za przebywanie na serwerze.
+		'functions_Points' => [
+			'on'	=> true,	//true - włączona false - wyłączona
+			'inst'	=> 2, //ID Instancji 
+			'top_list' => true,	//Czy ma ustawiać TOP w opisie kanału.
+			'cid' => 1,	//ID kanału gdzie ma wyświetlać top.
+			'gid'		=> [
+				1, 2
+			],	//ID grupy, której ma nie wyświetlać w topce.
+			'cldbid'	=> [
+				1, 2, 3
+			],	//Client database id użytkowników, których ma nie wyświetlać w topce np. MusicBOT czy też ten bot.
+			'limit'		=> 20	//Limit osób, które ma wyświetlać w top.
+		],
+
 	//Poke() Funkcja puka podane grupy jeżeli ktoś wbije na podany kanał.
 		'functions_Poke' => [
 			'on'	=> false,	//true - włączona false - wyłączona
@@ -390,7 +405,9 @@
 			'cid_name'	=> [
 				1 => [	//ID kanału w którym ma ustawiać opis oraz nazwę.
 					'users' => 'kayser',	//Nick osoby na twitchu.
-					'channel_name' => '[cspacer8] Stream kayserv {1}'//Nazwa kanału jaką ma ustawiać {1} jest zamienianę na online lub offline.
+					'channel_name' => '[cspacer8] Stream kayserv {1}',	//Nazwa kanału jaką ma ustawiać {1} jest zamienianę na online lub offline.
+					'info'	=>	true, //Czy ma wysyłać informacje o tym, że użytkownik rozpoczął transmisję live true - tak false - nie 
+					'info_text' => 'Hejka {1} właśnie odpalił live {2} Zapraszamy!' //Tekst, który ma wysyłać gdy użytkownik odpali live {1} - nick {2} - link do kanału
 				]
 			]
 

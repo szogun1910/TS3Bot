@@ -17,11 +17,12 @@
 						$expup = $exp/$cit;
 					}
 					try {
+						$count = 0;
 						$prepare = Bot::$db->prepare("UPDATE `users` SET `exp` = exp+:exp WHERE `cldbid` = :cldbid");
 						$prepare->bindValue(':exp', $expup, PDO::PARAM_STR);
 						$prepare->bindValue(':cldbid', $cl['client_database_id'], PDO::PARAM_INT);
 						$prepare->execute();
-						$prepare = Bot::$db->prepare("SELECT COUNT(id) AS `count`, `exp`, `lvl` FROM `users` WHERE `cldbid` = :cldbid");
+						$prepare = Bot::$db->prepare("SELECT COUNT(id) AS `count`, `exp`, `lvl` FROM `users` WHERE `cldbid` = :cldbid GROUP BY `id`");
 						$prepare->bindValue(':cldbid', $cl['client_database_id'], PDO::PARAM_INT);
 						$prepare->execute();
 						while($row = $prepare->fetch()){
@@ -79,7 +80,7 @@
 						}
 					}
 					$channelEdit= self::$tsAdmin->channelEdit($this->config['functions_Lvl']['cid'], ['channel_description' => self::$l->sprintf(self::$l->list_Lvl, $top)]);
-					if(!empty($channelEdit['errors'][0])){
+					if(!empty($channelEdit['errors'][0]) && $channelEdit['errors'][0] != 'ErrorID: 771 | Message: channel name is already in use'){
 						$this->bot->log(1, 'Kanał o ID:'.$this->config['functions_Lvl']['cid'].' nie istnieje Funkcja: Lvl()');
 					}
 					self::$lvl_time = time()+60;

@@ -128,7 +128,7 @@
 					$msg = explode(' ', $wiadomosci);
 					$command = str_replace([ '.', '!' ], '', strtolower($msg[0]));
 					try{
-						$query2 = Bot::$db->prepare("SELECT COUNT(id) AS `count`, `staff`, `group`, `cmd` FROM `command` WHERE `cmd` = :command OR `alias` =  :command AND `alias` != '' LIMIT 1");
+						$query2 = Bot::$db->prepare("SELECT COUNT(id) AS `count`, `staff`, `group`, `cmd` FROM `command` WHERE `cmd` = :command OR `alias` =  :command AND `alias` != '' GROUP BY `id` LIMIT 1");
 						$query2->bindValue(':command', $command, PDO::PARAM_STR);
 						$query2->execute();
 						while($row2 = $query2->fetch()){
@@ -254,7 +254,7 @@
 		{
 			$clientInfo = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientInfo($invokerid));
 			$cisg = explode(',', $clientInfo['client_servergroups']);
-			$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `staff` FROM `users` WHERE `cui` = '{$invokeruid}'");
+			$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `staff` FROM `users` WHERE `cui` = '{$invokeruid}' GROUP BY `id`");
 			try {
 				while($row = $query->fetch()){
 					if($row['count'] == 0){
@@ -367,12 +367,13 @@
 						$clientInfo = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientInfo($cl['clid']));
 						if($clientInfo){
 							try {
-								$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `longest_connection` FROM `users` WHERE `cldbid` = {$cl['client_database_id']} LIMIT 1");
+								$count = 0;
+								$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `longest_connection` FROM `users` WHERE `cldbid` = {$cl['client_database_id']} GROUP BY `id` LIMIT 1");
 								while($row = $query->fetch()){
 									$longest_connection = $row['longest_connection'];
 									$count = $row['count'];
 								}
-								if($count == 0){
+								if(empty($count)){
 									$prepare = Bot::$db->prepare("INSERT INTO `users` (`cldbid`, `client_nickname`, `cui`, `last_activity`, `regdate`, `gid`) VALUES (:cldbid, :client_nickname, :cui, :last_activity, :regdate, :gid)");
 									$prepare->bindValue(':cldbid', $cl['client_database_id'], PDO::PARAM_INT);
 									$prepare->bindValue(':client_nickname', $cl['client_nickname'], PDO::PARAM_STR);
