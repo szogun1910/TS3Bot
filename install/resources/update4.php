@@ -9,7 +9,7 @@ v<?php
 	}
 	$fgc = preg_replace('/\'ver\'(.*)=> \'([0-9.]+)\'/', '\'ver\'	=> \'4.1.3\'', $fgc);
 	if(preg_match("/'channel_name'.*=>.*'(.*)'\/\/(.*)./", $fgc)){
-		$fgc = preg_replace("/'channel_name'.*=>.*'(.*)'\/\/(.*)./", "'channel_name'	=>	'$1',\t//$2\n					'info' => true\t//Czy ma wysyłać informacje o tym, że użytkownik rozpoczął transmisję live true - tak false - nie ,\n					'info_text' => 'Hejka naklejka {1} właśnie odpalił live {2} Zapraszamy!'	//Tekst, który ma wysyłać gdy użytkownik odpali live {1} - nick {2} - link do kanału", $fgc);
+		$fgc = preg_replace("/'channel_name'.*=>.*'(.*)'\/\/(.*)./", "'channel_name'	=>	'$1',\t//$2\n					'info' => true,\t//Czy ma wysyłać informacje o tym, że użytkownik rozpoczął transmisję live true - tak false - nie ,\n					'info_text' => 'Hejka naklejka {1} właśnie odpalił live {2} Zapraszamy!'	//Tekst, który ma wysyłać gdy użytkownik odpali live {1} - nick {2} - link do kanału", $fgc);
 		echo "Dodano dwie opcje do config.php 'info' - która pozwala nam ustawić czy ma wysyłać informacje o tym, że użytkownik rozpoczął transmisję live oraz 'info_text' - która pozwala ustawić tekst wysyłany podczas odpalania transmisji";
 	}else{
 		echo "Coś poszło nie tak:C Nie można zaktualizować config.php";
