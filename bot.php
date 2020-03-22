@@ -5,7 +5,7 @@
 	/**
 	 * @author		Majcon
 	 * @email		Majcon94@gmail.com
-	 * @copyright	© 2016-2018 Majcon
+	 * @copyright	© 2016-2020 Majcon
 	 * @version		3.5
 	 **/
 	spl_autoload_register(function ($class_name) {

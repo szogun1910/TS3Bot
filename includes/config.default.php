@@ -24,7 +24,7 @@
 
 		'bot' => [
 		
-			'ver'	=> '413'	//Wersja bota.	
+			'ver'	=> '414'	//Wersja bota.	
 		
 		],
 
@@ -211,26 +211,26 @@
 		'on'	=> false,	//true - włączona false - wyłączona
 		'inst'	=> 2, //ID Instancji 
 		'lvl'	=> [
-			1 => ['exp' => 0, 'gid' => 1],
-			2 => ['exp' => 100, 'gid' => 1],
-			3 => ['exp' => 200, 'gid' => 1],
-			4 => ['exp' => 300, 'gid' => 1],
-			5 => ['exp' => 500, 'gid' => 1],
-			6 => ['exp' => 800, 'gid' => 1],
-			7 => ['exp' => 1300, 'gid' => 1],
-			8 => ['exp' => 2100, 'gid' => 1],
-			9 => ['exp' => 3400, 'gid' => 1],
-			10 => ['exp' => 5500, 'gid' => 1],
-			11 => ['exp' => 8900, 'gid' => 1],
-			12 => ['exp' => 14400, 'gid' => 1],
-			13 => ['exp' => 23300, 'gid' => 1],
-			14 => ['exp' => 37700, 'gid' => 1],
-			15 => ['exp' => 61000, 'gid' => 1],
-			16 => ['exp' => 98700, 'gid' => 1],
-			17 => ['exp' => 159700, 'gid' => 1],
-			18 => ['exp' => 258400, 'gid' => 1],
-			19 => ['exp' => 418100, 'gid' => 1],
-			20 => ['exp' => 676500, 'gid' => 1]
+			1 => ['exp' => 0, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 1 lvl'],
+			2 => ['exp' => 100, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 2 lvl'],
+			3 => ['exp' => 200, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 3 lvl'],
+			4 => ['exp' => 300, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 4 lvl'],
+			5 => ['exp' => 500, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 5 lvl'],
+			6 => ['exp' => 800, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 6 lvl'],
+			7 => ['exp' => 1300, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 7 lvl'],
+			8 => ['exp' => 2100, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 8 lvl'],
+			9 => ['exp' => 3400, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 9 lvl'],
+			10 => ['exp' => 5500, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 10 lvl'],
+			11 => ['exp' => 8900, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 11 lvl'],
+			12 => ['exp' => 14400, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 12 lvl'],
+			13 => ['exp' => 23300, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 13 lvl'],
+			14 => ['exp' => 37700, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 14 lvl'],
+			15 => ['exp' => 61000, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 15 lvl'],
+			16 => ['exp' => 98700, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 16 lvl'],
+			17 => ['exp' => 159700, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 17 lvl'],
+			18 => ['exp' => 258400, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 18 lvl'],
+			19 => ['exp' => 418100, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 19 lvl'],
+			20 => ['exp' => 676500, 'gid' => 1, 'text' => 'Gratulacje właśnie awansowałeś na 20 lvl']
 		],//	Lvl wymagany exp oraz ID grupy, która ma nadać.
 		'group' => true,	//Czy ma nadawać grupę true - tak false -nie.
 		'required_group' => [1, 2],	//Wymagana ranga żeby dostać rangę lvl.

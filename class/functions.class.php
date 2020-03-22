@@ -368,7 +368,7 @@
 						if($clientInfo){
 							try {
 								$count = 0;
-								$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `longest_connection` FROM `users` WHERE `cldbid` = {$cl['client_database_id']} GROUP BY `id` LIMIT 1");
+								$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `longest_connection` FROM `users` WHERE `cui` = '{$cl['client_unique_identifier']}' GROUP BY `id` LIMIT 1");
 								while($row = $query->fetch()){
 									$longest_connection = $row['longest_connection'];
 									$count = $row['count'];

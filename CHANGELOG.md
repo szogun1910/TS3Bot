@@ -1,4 +1,9 @@
 # Changelog
+
+## [4.1.4] - 22.03.2020
+* Zmiany w lvl.
+* Poprawki błędów.
+
 ## [4.1.3] - 09.01.2020
 * Aktualizacja API w funkcji statusTwitch() oraz dodanie możliwości włączenia wiadomości gdy zacznie się live.
 * Naprawienie błędu z only_full_group_by.

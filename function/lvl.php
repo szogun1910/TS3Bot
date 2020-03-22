@@ -3,14 +3,35 @@
 	class Lvl extends Command {
 
 		public static $lvl_time = 0;
+		public static $clientIdle = [];
 		
 		public function execute(): void
 		{
 			$lvl_clientlist = [];
 			foreach($this->bot->getClientList() as $cl){
 				if(!in_array($cl['clid'], $lvl_clientlist)){
+					if($cl['client_idle_time'] <= 700){
+						if(isset(self::$clientIdle[$cl['client_database_id']])){
+							self::$clientIdle[$cl['client_database_id']]++;
+						}else{
+							self::$clientIdle[$cl['client_database_id']] = 0;
+						}
+					}else{
+						self::$clientIdle[$cl['client_database_id']] = 0;
+					}
 					if($cl['client_idle_time'] <= 1000){
-						$expup = 0.024;
+						if(self::$clientIdle[$cl['client_database_id']] >= 300){
+							$exp = 0.047;
+							if($cl['client_idle_time'] == 0){
+								$idle = 1;
+							}else{
+								$idle = $cl['client_idle_time'];
+							}
+							$cit = round(pow($idle, 1/1.89), 10);
+							$expup = $exp/$cit;
+						}else{
+							$expup = 0.024;
+						}
 					}else{
 						$exp = 0.047;
 						$cit = round(pow($cl['client_idle_time']/1000, 1/1.89), 10);
@@ -18,12 +39,12 @@
 					}
 					try {
 						$count = 0;
-						$prepare = Bot::$db->prepare("UPDATE `users` SET `exp` = exp+:exp WHERE `cldbid` = :cldbid");
+						$prepare = Bot::$db->prepare("UPDATE `users` SET `exp` = exp+:exp WHERE `cui` = :cui");
 						$prepare->bindValue(':exp', $expup, PDO::PARAM_STR);
-						$prepare->bindValue(':cldbid', $cl['client_database_id'], PDO::PARAM_INT);
+						$prepare->bindValue(':cui', $cl['client_unique_identifier'], PDO::PARAM_STR);
 						$prepare->execute();
-						$prepare = Bot::$db->prepare("SELECT COUNT(id) AS `count`, `exp`, `lvl` FROM `users` WHERE `cldbid` = :cldbid GROUP BY `id`");
-						$prepare->bindValue(':cldbid', $cl['client_database_id'], PDO::PARAM_INT);
+						$prepare = Bot::$db->prepare("SELECT COUNT(id) AS `count`, `exp`, `lvl` FROM `users` WHERE `cui` = :cui GROUP BY `id`");
+						$prepare->bindValue(':cui', $cl['client_unique_identifier'], PDO::PARAM_STR);
 						$prepare->execute();
 						while($row = $prepare->fetch()){
 							$count = $row['count'];
@@ -32,22 +53,29 @@
 						}
 						if($count != 0){
 							$nextLvl = $lvl+1;
-							if($this->config['functions_Lvl']['lvl'][$nextLvl]['exp'] <= $exp){
-								if($cl['client_type'] == 0) {
-									$prepare = Bot::$db->prepare("UPDATE `users` SET `lvl` = :lvl WHERE `cldbid` = :cldbid");
-									$prepare->bindValue(':lvl', $nextLvl, PDO::PARAM_INT);
-									$prepare->bindValue(':cldbid', $cl['client_database_id'], PDO::PARAM_INT);
-									$prepare->execute();
-									self::$tsAdmin->sendMessage(1, $cl['clid'], self::$l->sprintf(self::$l->success_update_Lvl, $nextLvl));
-									if($this->config['functions_Lvl']['group'] == true){
-										self::$tsAdmin->serverGroupDeleteClient($this->config['functions_Lvl']['lvl'][$lvl]['gid'], $cl['client_database_id']);
-										if(empty($this->config['functions_Lvl']['required_group']) || array_intersect(explode(',', $cl['client_servergroups']), $this->config['functions_Lvl']['required_group'])){
-											$serverGroupAddClient = self::$tsAdmin->serverGroupAddClient($this->config['functions_Lvl']['lvl'][$nextLvl]['gid'], $cl['client_database_id']);
-											if(!empty($serverGroupAddClient['errors'][0])){
-												$this->bot->log(1, 'Grupa o ID:'.$this->config['functions_Lvl']['lvl'][$nextLvl]['gid'].' nie istnieje Funkcja: Lvl()');
-											}
+							$downlvl = $lvl-1;
+							if($this->config['functions_Lvl']['group'] == true){
+								if(array_intersect(explode(',', $cl['client_servergroups']), $this->config['functions_Lvl']['required_group'])){
+									if(!in_array($this->config['functions_Lvl']['lvl'][$lvl]['gid'], explode(',', $cl['client_servergroups']))){
+										$serverGroupAddClient = self::$tsAdmin->serverGroupAddClient($this->config['functions_Lvl']['lvl'][$lvl]['gid'], $cl['client_database_id']);
+										if(!empty($serverGroupAddClient['errors'][0])){
+											$this->bot->log(1, 'Grupa o ID:'.$this->config['functions_Lvl']['lvl'][$lvl]['gid'].' nie istnieje Funkcja: Lvl()');
 										}
 									}
+									if($lvl != 1){
+										if(in_array($this->config['functions_Lvl']['lvl'][$downlvl]['gid'], explode(',', $cl['client_servergroups']))){
+											self::$tsAdmin->serverGroupDeleteClient($this->config['functions_Lvl']['lvl'][$downlvl]['gid'], $cl['client_database_id']);
+										}
+									}
+								}
+							}
+							if($this->config['functions_Lvl']['lvl'][$nextLvl]['exp'] <= $exp){
+								if($cl['client_type'] == 0) {
+									$prepare = Bot::$db->prepare("UPDATE `users` SET `lvl` = :lvl WHERE `cui` = :cui");
+									$prepare->bindValue(':lvl', $nextLvl, PDO::PARAM_INT);
+									$prepare->bindValue(':cui', $cl['client_unique_identifier'], PDO::PARAM_STR);
+									$prepare->execute();
+									self::$tsAdmin->sendMessage(1, $cl['clid'], $this->config['functions_Lvl']['lvl'][$nextLvl]['text']);
 								}
 							}
 						}

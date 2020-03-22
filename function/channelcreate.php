@@ -29,14 +29,19 @@
 						}
 					}
 					if($count == 0){
-						$query = self::$db->query("SELECT COUNT(id) AS `count` FROM `channel` WHERE `connection_client_ip` = '{$ccl['connection_client_ip']}' GROUP BY `id`");
-						while($row = $query->fetch()){
-							if($row['count'] < $this->config['functions_ChannelCreate']['limit_ip'] || $this->config['functions_ChannelCreate']['limit_ip'] == 0){
-								$limit_ip = 0;
-							}else{
-								$limit_ip = 1;
-							}
-						
+						try{
+							$query = self::$db->prepare("SELECT COUNT(id) AS `count` FROM `channel` WHERE `connection_client_ip` = :cci");
+							$query->bindValue(':cci', $ccl['connection_client_ip'], PDO::PARAM_STR);
+							$query->execute();
+							while($row = $query->fetch()){
+								if($row['count'] < $this->config['functions_ChannelCreate']['limit_ip'] || $this->config['functions_ChannelCreate']['limit_ip'] == 0){
+									$limit_ip = 0;
+								}else{
+									$limit_ip = 1;
+								}
+							}	
+						} catch (PDOException $e) {
+							$this->log(1, $e->getMessage());
 						}
 						if($limit_ip == 0){
 							$zalozony = 0;

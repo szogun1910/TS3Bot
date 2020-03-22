@@ -20,7 +20,7 @@
 							$duration = date('d.m.Y H:i:s', $bl['created']+$bl['duration']);
 						}
 						$clientGetDbIdFromUid = self::$tsAdmin->getElement('data', self::$tsAdmin->clientGetDbIdFromUid($bl['uid']));
-						$lastnickname = $this->bot->getUrlName($clientGetDbIdFromUid['cldbid'], $bl['uid'], $bl['lastnickname']);
+						$lastnickname = $this->bot->getUrlName($clientGetDbIdFromUid['cldbid'] ?? 'b/d', $bl['uid'] ?? 'b/d', $bl['lastnickname'] ?? 'b/d') ?? 'b\d';
 						$invokername = $this->bot->getUrlName($bl['invokercldbid'], $bl['invokeruid'], $bl['invokername']);
 						$created = date('d.m.Y H:i:s', (int)$bl['created']);
 						$row .= self::$l->sprintf(self::$l->BanList_row, $i, $lastnickname, $bl['reason'], $invokername, $created, $duration);
