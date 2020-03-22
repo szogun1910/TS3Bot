@@ -8,6 +8,7 @@
 * Aktualizacja API w funkcji statusTwitch() oraz dodanie możliwości włączenia wiadomości gdy zacznie się live.
 * Naprawienie błędu z only_full_group_by.
 * Poprawka kilku innych drobnych błędów.
+
 Aby zaktualizować bota należy zrobić backupa, pobrać pliki, nadpisać oraz wpisać ./start.sh update
 W razie błędu przy aktualizacji należy ponowanie skonfigurować bota
 
