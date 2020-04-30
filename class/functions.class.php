@@ -386,7 +386,7 @@
 									if($longest_connection < $clientInfo['connection_connected_time']){
 										$longest_connection = $clientInfo['connection_connected_time'];
 									}
-									$prepare = Bot::$db->prepare("UPDATE `users` SET `connections` = :connections, `longest_connection` = :longest_connection, `time_activity` = time_activity+:time_activity, `last_activity` = :last_activity, `client_nickname` = :client_nickname, `gid` = :gid, `regdate` = :regdate  WHERE `cldbid` = :cldbid");
+									$prepare = Bot::$db->prepare("UPDATE `users` SET `cldbid` = :cldbid, `connections` = :connections, `longest_connection` = :longest_connection, `time_activity` = time_activity+:time_activity, `last_activity` = :last_activity, `client_nickname` = :client_nickname, `gid` = :gid, `regdate` = :regdate  WHERE `cui` = :cui");
 									$prepare->bindValue(':connections', $clientInfo['client_totalconnections'], PDO::PARAM_INT);
 									$prepare->bindValue(':longest_connection', $longest_connection, PDO::PARAM_INT);
 									if($cl['client_idle_time'] < 300000){
@@ -399,6 +399,7 @@
 									$prepare->bindValue(':gid', $clientInfo['client_servergroups'], PDO::PARAM_STR);
 									$prepare->bindValue(':regdate', $clientInfo['client_created'], PDO::PARAM_INT);
 									$prepare->bindValue(':cldbid', $cl['client_database_id'], PDO::PARAM_INT);
+									$prepare->bindValue(':cui', $cl['client_unique_identifier'], PDO::PARAM_STR);
 									$prepare->execute();
 								}
 								$update_activity_clientlist[] = $cl['clid'];
@@ -422,8 +423,8 @@
 		 **/
 		public function sendMessage(int $clid, string $text): void
 		{
-			if(mb_strlen($text, 'utf8') > 1024){
-				$wordwrap = wordwrap($text, 1024, "[podziel]", true);
+			if(strlen($text) > 8190){
+				$wordwrap = wordwrap($text, 8190, "[podziel]", true);
 				$explode = explode('[podziel]', $wordwrap);
 				foreach($explode as $exp){
 					Bot::$tsAdmin->sendMessage(1, $clid, $exp);

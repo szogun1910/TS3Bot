@@ -8,12 +8,21 @@
 		{
 			$time = time() - $this->config['functions_NewUser']['time'];
 			$i = 0;
+			$userplus = 0;
 			$query = self::$db->query("SELECT `client_nickname`, `cui`, `cldbid` FROM `users` WHERE `regdate` >= {$time} ORDER BY `regdate` DESC");
 			while($row = $query->fetch()){
 				$i++;
-				$user_list[] = $this->bot->getUrlName($row['cldbid'], $row['cui'], $row['client_nickname']);
+				if($i >= 61){
+					$userplus++;
+				}else{
+					$user_list[] = $this->bot->getUrlName($row['cldbid'], $row['cui'], $row['client_nickname']);
+				}
 			}
-			$user_list = implode(', ', $user_list ?? []);
+			if($userplus != 0){
+				$user_list = implode(', ', $user_list ?? []).', oraz '.$userplus.' innych';
+			}else{
+				$user_list = implode(', ', $user_list ?? []);
+			}
 			if($user_list != self::$olde_user_list){
 				$date['channel_description'] = self::$l->sprintf(self::$l->NewUser_title, $user_list);
 				if($this->config['functions_NewUser']['counter'] == 1){

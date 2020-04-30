@@ -100,8 +100,49 @@
 	$lang['success_change_staffcmdtxt'] = "Zmieniasz dostęp do komendy {1} na staff {2}";
 
 //stats.php
-	$lang['success_info_from_stats'] = "Ilość połączeń: {1}\nMiejsce w TOP Połączeń {2}\nCzas aktywności: {3}\nMiejsce w TOP Czas przebywania: {4}\nNajdłuższe połączenie: {5}\nMiejsce w TOP Najdłuższe połączenie {6}";
-	$lang['success_info_user_stats'] = "Statystyki użytkownika {1}\nIlość połączeń: {2}\nMiejsce w TOP Połączeń {3}\nCzas aktywności: {4}\nMiejsce w TOP Czas przebywania: {5}\nNajdłuższe połączenie: {6}\nMiejsce w TOP Najdłuższe połączenie {7}";
+	$lang['success_info_from_stats'] = "[b][color=olive]Statystyki[/color]
+	
+	📌  Ilość połączeń: [color=brown]{1}[/color]
+	[color=silver]—————————————————————————[/color]
+	📌  Poziom: [color=brown]{7}[/color]
+	[color=silver]—————————————————————————[/color]
+	📌  Doświadczenie: [color=brown]{8}/{9} {10}%[/color]
+	[color=silver]—————————————————————————[/color]
+	📌  Czas aktywności: [color=brown]{3}[/color] 
+	[color=silver]—————————————————————————[/color]
+	📌  Najdłuższe połączenie: [color=brown]{5}[/color] 
+	
+	[color=olive]Ranking[/color]
+	
+	🏆  Miejsce w TOP połączeń: [color=brown]{2}[/color]
+	[color=silver]—————————————————————————[/color]
+	🏆  Miejsce w TOP Czas przebywania: [color=brown]{4}[/color]
+	[color=silver]—————————————————————————[/color]
+	🏆  Miejsce w TOP Najdłuższych połączeń: [color=brown]{6}[/color]
+	[color=silver]—————————————————————————[/color]
+	🏆  Miejsce w TOP Posiadane doświadczenie: [color=brown]{11}[/color][/b]";
+
+	$lang['success_info_user_stats'] = "[b][color=olive]Statystyki {1}[/color]
+	
+	📌  Ilość połączeń: [color=brown]{2}[/color]
+	[color=silver]—————————————————————————[/color]
+	📌  Poziom: [color=brown]{8}[/color]
+	[color=silver]—————————————————————————[/color]
+	📌  Doświadczenie: [color=brown]{9}/{10} {11}%[/color]
+	[color=silver]—————————————————————————[/color]
+	📌  Czas aktywności: [color=brown]{4}[/color] 
+	[color=silver]—————————————————————————[/color]
+	📌  Najdłuższe połączenie: [color=brown]{6}[/color] 
+	
+	[color=olive]Ranking[/color]
+
+	🏆  Miejsce w TOP połączeń: [color=brown]{3}[/color]
+	[color=silver]—————————————————————————[/color]
+	🏆  Miejsce w TOP Czas przebywania: [color=brown]{5}[/color]
+	[color=silver]—————————————————————————[/color]
+	🏆  Miejsce w TOP Najdłuższych połączeń: [color=brown]{7}[/color]
+	[color=silver]—————————————————————————[/color]
+	🏆  Miejsce w TOP Posiadane doświadczenie: [color=brown]{12}[/color][/b]";
 
 //userinfo.php
 	$lang['error_give_clidbid_userinfo'] = "Podaj cldbid lub uid";

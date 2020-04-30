@@ -24,7 +24,7 @@
 
 		'bot' => [
 		
-			'ver'	=> '414'	//Wersja bota.	
+			'ver'	=> '415'	//Wersja bota.	
 		
 		],
 
@@ -153,6 +153,16 @@
 				'google.com',
 				'facebook.com'
 			]	//Lista dostępnych domen.
+		],
+
+	//DelInfoChannel() Funkcja wysyła wiadomość gdy prawdopodobnie jest przeprowadzany atak ddos.
+		'functions_DdosInfo' => [
+			'on'			=> false,	//true - włączona false - wyłączona
+			'inst'			=> 3, //ID Instancji 
+			'gid'			=> [1, 2],	//ID Grup którym ma wysyłać wiadomość.
+			'description'	=> true,	//Czy ma w opisie użytkowników z podanych wyżej ustawiać aktualny ping oraz utratę pakietów true - tak false - nie.
+			'ping'			=> 60,	//Wielkość średniego pingu od którego ma wysyłać wiadomość.
+			'packet'		=> 60,	//Wielkość średnich utraaconych pakietów od których ma wysyłać wiadomość
 		],
 
 	//DelInfoChannel() Funkcja ustawia w opisie kanału listę kanałów które zostana usunięte w najbliższym czasie.

@@ -38,7 +38,7 @@
 			}else{
 				$onlineui = Bot::$l->offline_users_info_userinfo;
 			}
-			$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `cid` FROM `channel` WHERE `cldbid` = {$cldbid}");
+			$query = Bot::$db->query("SELECT COUNT(id) AS `count`, `cid` FROM `channel` WHERE `cldbid` = {$cldbid} GROUP BY `id`");
 			while($row = $query->fetch()){
 				if($row['count'] == 0){
 					$channel = 'Brak';

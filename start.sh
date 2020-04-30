@@ -19,6 +19,12 @@
 		else
 			text "31;02m" "Bot nr 2 jest juz uruchomiony!"
 		fi
+		if ! screen -list | grep -q "botphp3"; then
+			screen -AdmS botphp3 php bot.php -i 3
+			text "32;01m" "Pomyslnie uruchomiono bota nr 3!"
+		else
+			text "31;02m" "Bot nr 2 jest juz uruchomiony!"
+		fi
 	}
 
 	function stop {
@@ -33,6 +39,12 @@
 		else
 			text "32;01m" "Pomyslnie zatrzymano bota nr 2!"
 			screen -X -S botphp2 stuff "^C"
+		fi
+		if ! screen -list | grep -q "botphp3"; then
+			text "31;02m" "Bot nr 3 nie był uruchomiony więc nie został zatrzymany"
+		else
+			text "32;01m" "Pomyslnie zatrzymano bota nr 3!"
+			screen -X -S botphp3 stuff "^C"
 		fi
 	}
 
@@ -49,10 +61,18 @@
 			text "32;01m" "Pomyslnie zatrzymano bota nr 2!"
 			screen -X -S botphp2 stuff "^C"
 		fi
+		if ! screen -list | grep -q "botphp3"; then
+			text "31;02m" "Bot nr 3 nie był uruchomiony"
+		else
+			text "32;01m" "Pomyslnie zatrzymano bota nr 3!"
+			screen -X -S botphp3 stuff "^C"
+		fi
 		screen -AdmS botphp1 php bot.php -i 1
 		text "32;01m" "Pomyslnie uruchomiono bota nr 1!"
 		screen -AdmS botphp2 php bot.php -i 2
 		text "32;01m" "Pomyslnie uruchomiono bota nr 2!"
+		screen -AdmS botphp3 php bot.php -i 3
+		text "32;01m" "Pomyslnie uruchomiono bota nr 3!"
 	}
 
 	function update {

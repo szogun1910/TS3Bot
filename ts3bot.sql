@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `test`
+-- Baza danych: `ts3bot`
 --
 
 -- --------------------------------------------------------
@@ -194,13 +194,15 @@ ALTER TABLE `command_txt`
 -- Indeksy dla tabeli `ip`
 --
 ALTER TABLE `ip`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `index_ip` (`ip`);
 
 --
 -- Indeksy dla tabeli `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `index_cui` (`cui`);
 
 --
 -- AUTO_INCREMENT for dumped tables

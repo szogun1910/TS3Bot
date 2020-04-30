@@ -8,6 +8,7 @@
 		public function execute(): void
 		{
 			$lvl_clientlist = [];
+			$cos = 0;
 			foreach($this->bot->getClientList() as $cl){
 				if(!in_array($cl['clid'], $lvl_clientlist)){
 					if($cl['client_idle_time'] <= 700){

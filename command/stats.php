@@ -46,7 +46,28 @@
 				}
 			}
 		}
-		$this->sendMessage($invokerid, Bot::$l->sprintf(Bot::$l->success_info_from_stats, $connections, $cs, $time_activity, $ts, $longest_connection, $ls));
+		if(!empty($this->config['functions_Lvl']['cldbid'])){
+			$cldbid_config = implode(",", $this->config['functions_Lvl']['cldbid']);
+		}
+		$es = 0;
+		$query = Bot::$db->query("SELECT `cldbid`, `exp`, `gid`, `lvl` FROM `users` WHERE `cldbid` NOT IN({$cldbid_config}) ORDER BY `exp` DESC");
+		while($row = $query->fetch()){
+			if(!array_intersect(explode(',', $row['gid']), $this->config['functions_Lvl']['gid'])){
+				$es++;
+				if($row['cldbid'] == $cldbid){
+					$lvl = $row['lvl'];
+					$exp = $row['exp'];
+					break;
+				}
+			}
+		}
+		$nextLvl = $lvl+1;
+		$expnext = $this->config['functions_Lvl']['lvl'][$nextLvl]['exp'];
+		$expnow = $this->config['functions_Lvl']['lvl'][$lvl]['exp'];
+		$expr = round($exp-$expnow, 2);
+		$return = $expnext-$expnow;
+		$expProcent = round($expr * 100 / $return);
+		$this->sendMessage($invokerid, Bot::$l->sprintf(Bot::$l->success_info_from_stats, $connections, $cs, $time_activity, $ts, $longest_connection, $ls, $lvl, $expr, $return, $expProcent, $es));
 		
 	}else{
 		$msg = $this->getDbid($msg);
@@ -104,7 +125,40 @@
 						}
 					}
 				}
-				$this->sendMessage($invokerid, Bot::$l->sprintf(Bot::$l->success_info_user_stats, $nick, $connections, $cs, $time_activity, $ts, $longest_connection, $ls));
+				$ls = 0;
+				$query = Bot::$db->query("SELECT `cldbid`, `longest_connection`, `gid` FROM `users` WHERE `cldbid` NOT IN({$cldbid_config}) ORDER BY `longest_connection` DESC");
+				while($row = $query->fetch()){
+					if(!array_intersect(explode(',', $row['gid']), $this->config['functions_TopLongestConnection']['gid'])){
+						$ls++;
+						if($row['cldbid'] == $cldbid){
+							$longest_connection = $this->przelicz_czas($row['longest_connection']/1000);
+							$longest_connection = $this->wyswietl_czas($longest_connection, 1, 1, 1, 0, 0);
+							break;
+						}
+					}
+				}
+				if(!empty($this->config['functions_Lvl']['cldbid'])){
+					$cldbid_config = implode(",", $this->config['functions_Lvl']['cldbid']);
+				}
+				$es = 0;
+				$query = Bot::$db->query("SELECT `cldbid`, `exp`, `gid`, `lvl` FROM `users` WHERE `cldbid` NOT IN({$cldbid_config}) ORDER BY `exp` DESC");
+				while($row = $query->fetch()){
+					if(!array_intersect(explode(',', $row['gid']), $this->config['functions_Lvl']['gid'])){
+						$es++;
+						if($row['cldbid'] == $cldbid){
+							$lvl = $row['lvl'];
+							$exp = $row['exp'];
+							break;
+						}
+					}
+				}
+				$nextLvl = $lvl+1;
+				$expnext = $this->config['functions_Lvl']['lvl'][$nextLvl]['exp'];
+				$expnow = $this->config['functions_Lvl']['lvl'][$lvl]['exp'];
+				$expr = round($exp-$expnow, 2);
+				$return = $expnext-$expnow;
+				$expProcent = round($expr * 100 / $return);
+				$this->sendMessage($invokerid, Bot::$l->sprintf(Bot::$l->success_info_user_stats, $nick, $connections, $cs, $time_activity, $ts, $longest_connection, $ls, $lvl, $expr, $return, $expProcent, $es));
 			}
 		}
 	}
