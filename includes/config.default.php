@@ -10,7 +10,8 @@
 			'port'		=> 9987,	//Server port
 			'queryport'	=> 10011,	//Query port
 			'nick1'		=> 'DziadekBOT #1',	//Nick bota na ts
-			'nick2'		=> 'DziadekBOT #2'	//Nick bota na ts
+			'nick2'		=> 'DziadekBOT #2',	//Nick bota na ts
+			'nick3'		=> 'DziadekBOT #3'	//Nick bota na ts
 
 		],
 
