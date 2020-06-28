@@ -4,7 +4,7 @@
 
 		public static $older_GroupOnline = [];
 		public static $older_GroupOnline_name = [];
-		public static $groupOnline_time_edition = 0;
+		public static $groupOnline_time_edition = [];
 
 		public function execute(): void
 		{
@@ -14,6 +14,7 @@
 				$groupOnline = NULL;
 				self::$older_GroupOnline[$cid] = self::$older_GroupOnline[$cid] ?? NULL;
 				self::$older_GroupOnline_name[$cid] = self::$older_GroupOnline_name[$cid] ?? NULL;
+				self::$groupOnline_time_edition[$cid] = self::$groupOnline_time_edition[$cid] ?? 0;
 				$channel_description = $value['title'];
 				foreach($value['gid'] as $gid => $name){
 					$serverGroupClientList = self::$tsAdmin->serverGroupClientList($gid, '-names');
@@ -43,12 +44,11 @@
 								}
 								if($online == false){
 									if($value['time_info'] == true){
+										$last_activity = 0;
 										$query = self::$db->query("SELECT COUNT(id) AS `count`, `last_activity` FROM `users` WHERE `cldbid` = {$sgcl['cldbid']} GROUP BY `last_activity` LIMIT 1");
 										while($row = $query->fetch()){
 											if(!empty($row['count'])){
 												$last_activity = $row['last_activity'];
-											}else{
-												$last_activity = 0;
 											}
 										}
 										$data = $this->bot->przelicz_czas(time()-$last_activity);
@@ -70,7 +70,7 @@
 				if($value['time_info'] != true){
 					$edit = 0;
 				}else{
-					if(self::$groupOnline_time_edition < time()){
+					if(self::$groupOnline_time_edition[$cid] < time()){
 						$edit = 1;
 					}
 				}
@@ -90,7 +90,7 @@
 						$this->bot->log(1, 'Kanał o ID:'.$cid.' nie istnieje Funkcja: groupOnline()');
 					}
 					self::$older_GroupOnline[$cid] = $groupOnline;
-					self::$groupOnline_time_edition = time()+60;
+					self::$groupOnline_time_edition[$cid] = time()+60;
 				}
 			}
 		}

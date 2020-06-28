@@ -3,6 +3,7 @@
 	class Functions{
 
 		private static $update_activity_time = NULL;
+		private static $registerList = [];
 
 		/**
 		 * bot()
@@ -353,6 +354,54 @@
 		}
 
 		/**
+		 * register()
+		 * Funkcja rejestruje użytkownika w bazie.
+		 * @author	Majcon
+		 * @return	void
+		 **/
+		public function register(): void
+		{
+			$listOfUser = [];
+			foreach($this->getClientList() as $cl) {
+				if($cl['client_type'] == 0) {
+					$listOfUser[] = $cl['clid'];
+				}
+			}
+			$registerClientList = [];
+			$new = array_diff($listOfUser, self::$registerList);
+			if(!empty($new)){
+				foreach($new as $n) {
+					if(!in_array($n, $registerClientList)){
+						$clientInfo = Bot::$tsAdmin->getElement('data', Bot::$tsAdmin->clientInfo($n));
+						if($clientInfo){
+							try {
+								$count = 0;
+								$query = Bot::$db->query("SELECT COUNT(id) AS `count` FROM `users` WHERE `cui` = '{$clientInfo['client_unique_identifier']}' GROUP BY `id` LIMIT 1");
+								while($row = $query->fetch()){
+									$count = $row['count'];
+								}
+								if(empty($count)){
+									$prepare = Bot::$db->prepare("INSERT INTO `users` (`cldbid`, `client_nickname`, `cui`, `last_activity`, `regdate`, `gid`) VALUES (:cldbid, :client_nickname, :cui, :last_activity, :regdate, :gid)");
+									$prepare->bindValue(':cldbid', $clientInfo['client_database_id'], PDO::PARAM_INT);
+									$prepare->bindValue(':client_nickname', $clientInfo['client_nickname'], PDO::PARAM_STR);
+									$prepare->bindValue(':cui', $clientInfo['client_unique_identifier'], PDO::PARAM_STR);
+									$prepare->bindValue(':last_activity', time(), PDO::PARAM_INT);
+									$prepare->bindValue(':regdate', $clientInfo['client_created'], PDO::PARAM_INT);
+									$prepare->bindValue(':gid', $clientInfo['client_servergroups'], PDO::PARAM_STR);
+									$prepare->execute();
+								}
+							} catch (PDOException $e) {
+								$this->log(1, $e->getMessage());
+							}
+						}
+						$registerClientList[] = $cl['clid'];
+					}
+				}
+				self::$registerList = $listOfUser;
+			}							
+		}
+
+		/**
 		 * update_activity()
 		 * Funkcja aktualizuje aktywność użytkowników.
 		 * @author	Majcon
@@ -424,14 +473,12 @@
 		public function sendMessage(int $clid, string $text): void
 		{
 			if(strlen($text) > 8190){
-				$wordwrap = wordwrap($text, 8190, "[podziel]", true);
-				$explode = explode('[podziel]', $wordwrap);
-				foreach($explode as $exp){
-					Bot::$tsAdmin->sendMessage(1, $clid, $exp);
-				}
-			}else{
-				Bot::$tsAdmin->sendMessage(1, $clid, $text);
+				$text = wordwrap($text, 8190, "||", true);
 			}
+			$explode = explode('||', $text);
+			foreach($explode as $exp){
+				Bot::$tsAdmin->sendMessage(1, $clid, $exp);
+			}		
 		}
 
 		/**

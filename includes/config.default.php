@@ -10,7 +10,8 @@
 			'port'		=> 9987,	//Server port
 			'queryport'	=> 10011,	//Query port
 			'nick1'		=> 'DziadekBOT #1',	//Nick bota na ts
-			'nick2'		=> 'DziadekBOT #2'	//Nick bota na ts
+			'nick2'		=> 'DziadekBOT #2',	//Nick bota na ts
+			'nick3'		=> 'DziadekBOT #3'	//Nick bota na ts
 
 		],
 
@@ -24,7 +25,7 @@
 
 		'bot' => [
 		
-			'ver'	=> '415'	//Wersja bota.	
+			'ver'	=> '414'	//Wersja bota.	
 		
 		],
 
@@ -98,6 +99,7 @@
 			'pid'		=> 2,	//Strefa, w której ma zakładać kanały prywatne.
 			'ile'		=> 2,	//Liczba podkanałów.
 			'gid'		=> 5,	//ID Grupy właściciela kanału.
+			'cgid'		=> [1,2],	//ID Grupy wymaganej do założenia kanału.
 			'limit_ip'	=> 3,	//Limit kanałów na jedno IP 0 - Brak limitu.
 			'pin'		=> true,	//Czy ma wysyłać pin do odzyskiwania kanału.
 			'channel_description'	=> '[hr]\n\nWłaściciel: %CLIENT_NICKNAME%\n\nData utworzenia: %DATE%\n\n[hr]', //Opis kanału %CLIENT_NICKNAME% - Nick właściciela kanału %DATE% - Data założenia %HOUR% - Godzina założenia
@@ -127,6 +129,17 @@
 			'separator'		=> '. '	//Separator oddzielający nazwę kanału od numeru.
 		],
 
+	//ChanneMessege() Funkcja wysyła wiadomość po wejściu na kanał o podanym ID
+	'functions_ChanneMessege' => [
+		'on'	=> false,	//true - włączona false - wyłączona
+		'inst'	=> 3, //ID Instancji 
+		'cid'	=> [
+			1 => 'testks',	//ID kanału oraz tekst wiadomości.
+			2 => 'testks2',
+			3 => 'testks3'
+		]
+	],
+
 	//ChannelNumber() Funkcja sprawdza i w razie, czego poprawia numer kanału.
 		'functions_ChannelNumber' => [
 			'on'			=> false,	//true - włączona false - wyłączona
@@ -155,7 +168,7 @@
 			]	//Lista dostępnych domen.
 		],
 
-	//DelInfoChannel() Funkcja wysyła wiadomość gdy prawdopodobnie jest przeprowadzany atak ddos.
+	//DdosInfo() Funkcja wysyła wiadomość gdy prawdopodobnie jest przeprowadzany atak ddos.
 		'functions_DdosInfo' => [
 			'on'			=> false,	//true - włączona false - wyłączona
 			'inst'			=> 3, //ID Instancji 
@@ -482,13 +495,60 @@
 			'cid'		=> 1,	//ID kanału, na którym ma ustawiać liczbe osób odwiedzających.
 		],
 
-	//WelcomeMessege() Funkcja wysyła wiadomość powitalną.
+		//WelcomeMessege() Funkcja wysyła wiadomość powitalną.
+		/*Dostępne zmienne
+			%CLIENT_IP% - Adres IP
+			%CLIENT_UNIQUE_ID% - Identyfikator użytkownika 
+			%CLIENT_DATABASE_ID% - Database ID klienta
+			%CLIENT_ID% - ID klienta
+			%CLIENT_CREATED% - Data pierwszego wejścia na serwer klienta
+			%CLIENT_COUNTRY% - Państwo klienta
+			%CLIENT_VERSION% - Wersja TS klienta
+			%CLIENT_PLATFORM% - System klienta
+			%CLIENT_NICKNAME% - Nazwa klienta
+			%CLIENT_TOTALCONNECTIONS% - Liczba wszystkich połączeń klienta
+			%CLIENT_LASTCONNECTED% - Ostatnie połączenie klienta
+			%CLIENTONLINE% - Liczba osób online na serwerze
+			%MAXCLIENT% - Maksymalna liczba osób online na serwerze
+			%SERVER_UPTIME% - Czas pracy serwera
+			%HOUR% - Godzina
+			%DATE% - Data
+			%TOP_CONNECTIONS% - Miejsce w TOP połączeń klienta
+			%CONNECTIONS% - Liczba wszystkich połączeń klienta
+			%TOP_ACTIVITY% - Miejsce w TOP aktywności klienta
+			%ACTIVITY_TIME% - Czas aktywności klienta
+			%TOP_LONGEST_CONNECTION% - Miejsce w TOP najdłuższego połączenia klienta
+			%LONGEST_CONNECTION% - Czas najdłuszego połączenia klienta
+			%TOP_LVL% - Miejsce w TOP LVL klienta
+			%LVL% - LVL klienta
+			%EXP%' -EXP klienta
+			Możesz użyć || żeby oddzielić wiadomości naprzykład Test||test
+		*/
 		'functions_WelcomeMessege' => [
-			'on'			=> false,	//true - włączona false - wyłączona
-			'inst'			=> 1, //ID Instancji 
-			'txt'			=> file_get_contents(__DIR__ . '/welcome_messege_txt.php'),		//Tekst wiadomości, którą dostanie użytkownik po wejściu na serwer.
-			'gid'			=> 8,	//ID grupy niezarejestrowanej, dla których ma wysyłać inną wiadomość.
-			'txt_new'		=> file_get_contents(__DIR__ . '/welcome_messege_txt_new.php')	//Tekst wiadomości, którą dostanie nowy użytkownik po wejściu na serwer.
+			'on'	=> false,	//true - włączona false - wyłączona
+			'inst'	=> 1, //ID Instancji 
+			'gid_mess'	=> [
+				1 => '[b]Witaj admin [color=blue]%CLIENT_NICKNAME%[/color] [color=red][/color] na serwerze [color=blue]TS3[/color].
+				Wpadłeś do nas [color=blue]%CLIENT_TOTALCONNECTIONS%[/color] raz z [color=blue]%CLIENT_COUNTRY%[/color].
+				Twoje IP: [color=blue]%CLIENT_IP%[/color].
+				Aktualnie OnLine: [color=green]%CLIENTONLINE%[/COLOR]/[color=blue]%MAXCLIENT%[/COLOR]
+				Jeżeli potrzebujesz pomocy napisz do mnie wiadomość. :) 
+				Lista moich funkcji otrzymasz po napisaniu „Co potrafisz”.',
+				2 => '[b][color=blue]%CLIENT_NICKNAME%[/color], witaj [color=red][/color] na serwerze [color=blue]TS3[/color].
+				Jesteś nowym użytkownikiem, więc skorzystaj z kanału
+				[URL=channelID://118]Zarejestrowana - Dziewczyna[/URL], aby się zarejestrować jako dziewczyna lub
+				[URL=channelID://117]Zarejestrowany - Chłopak[/URL], aby się zarejestrować jako chłopak
+				Twoje IP: [color=blue]%CLIENT_IP%[/color].
+				Aktualnie OnLine: [color=green]%CLIENTONLINE%[/COLOR]/[color=blue]%MAXCLIENT%[/COLOR]
+				Jeżeli potrzebujesz pomocy napisz do mnie wiadomość. :) 
+				Lista moich funkcji otrzymasz po napisaniu „Co potrafisz”.'	//ID grupy oraz wiadomość którą ma dostać.
+			],
+			'remainder'	=> '[b]Witaj [color=blue]%CLIENT_NICKNAME%[/color] [color=red][/color] na serwerze [color=blue]TS3[/color].
+			Wpadłeś do nas [color=blue]%CLIENT_TOTALCONNECTIONS%[/color] raz z [color=blue]%CLIENT_COUNTRY%[/color].
+			Twoje IP: [color=blue]%CLIENT_IP%[/color].
+			Aktualnie OnLine: [color=green]%CLIENTONLINE%[/COLOR]/[color=blue]%MAXCLIENT%[/COLOR]
+			Jeżeli potrzebujesz pomocy napisz do mnie wiadomość. :) 
+			Lista moich funkcji otrzymasz po napisaniu „Co potrafisz”.'	//Wiadomość dla pozostałych.
 		]
 	];
 ?>

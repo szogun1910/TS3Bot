@@ -125,18 +125,6 @@
 						}
 					}
 				}
-				$ls = 0;
-				$query = Bot::$db->query("SELECT `cldbid`, `longest_connection`, `gid` FROM `users` WHERE `cldbid` NOT IN({$cldbid_config}) ORDER BY `longest_connection` DESC");
-				while($row = $query->fetch()){
-					if(!array_intersect(explode(',', $row['gid']), $this->config['functions_TopLongestConnection']['gid'])){
-						$ls++;
-						if($row['cldbid'] == $cldbid){
-							$longest_connection = $this->przelicz_czas($row['longest_connection']/1000);
-							$longest_connection = $this->wyswietl_czas($longest_connection, 1, 1, 1, 0, 0);
-							break;
-						}
-					}
-				}
 				if(!empty($this->config['functions_Lvl']['cldbid'])){
 					$cldbid_config = implode(",", $this->config['functions_Lvl']['cldbid']);
 				}

@@ -25,6 +25,7 @@
 					$this->readChatMessage();
 					$this->setClientList();
 					$this->setServerinfo();
+					$this->register();
 					if($this->inst == 2){
 						$this->update_activity();
 					}
@@ -111,6 +112,7 @@
 			try {
 				self::$db = new PDO('mysql:host='.$this->config['mysql']['host'].';dbname='.$this->config['mysql']['database'].';charset=utf8mb4;port='.$this->config['mysql']['port'], $this->config['mysql']['username'], $this->config['mysql']['password']);
 				self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				self::$db->query("SET NAMES utf8mb4");
 			} catch (PDOException $e) {
 				$this->log(1, $e->getMessage());
 			}

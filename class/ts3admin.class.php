@@ -47,7 +47,7 @@ class ts3admin {
 	*
 	* @author     Stefan Zehnpfennig
 	*/
-	private $runtime = array('socket' => '', 'selected' => false, 'host' => '', 'queryport' => '10011', 'timeout' => 2, 'debug' => array(), 'fileSocket' => '', 'bot_clid' => '', 'bot_name' => '');
+	public $runtime = array('socket' => '', 'selected' => false, 'host' => '', 'queryport' => '10011', 'timeout' => 2, 'debug' => array(), 'fileSocket' => '', 'bot_clid' => '', 'bot_name' => '');
 
 //*******************************************************************************************	
 //*************************************** Constants *****************************************
@@ -4842,7 +4842,7 @@ class ts3admin {
 		$data = fgets($this->runtime['socket'], 4096);
 		
 		if(!empty($data))
-		{		
+		{
 			$rtnData['success'] = 1;
 			$msgData = explode(" ", $data);
 			foreach($msgData as $param)
