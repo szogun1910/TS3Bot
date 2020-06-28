@@ -18,6 +18,19 @@
 Aby zaktualizować bota należy wpisać ./start.sh update w razie błędu proszę sprawdzić czy w bazie danych w tabeli users nie ma duplikatów i je usunąć.
 Zapytanie które pozwoli sprawdzić SELECT COUNT(cui), cui FROM users GROUP BY cui HAVING COUNT(cui)>1
 
+## [4.1.5] - 30.04.2020
+* Dodano nową funkcję DdosInfo(), która wysyła wiadomość do podanych grup o tym, że prawdopodomnie jest przeprowadzany atak.
+* Dodanie do komendy stats informacji o lvl oraz posiadanym expie.
+* Naprawiono komendę usersinfo.
+* Naprawa błędu w GroupOnline().
+* Zabezpieczenie przed zbyt długim opisem w NewUser() od teraz będzie wyświetlać tylko 61 osób i w razie większej liczby osób dopisywać "oraz x innych".
+* Od teraz WelcomeMessege nie będzie wysyłać wiadomości po restarcie bota.
+* Powolne przejście z DBID na CUID.
+* Optymalizacja bazy danych.
+
+Aby zaktualizować bota należy wpisać ./start.sh update w razie błędu proszę sprawdzić czy w bazie danych w tabeli users nie ma duplikatów i je usunąć.
+Zapytanie które pozwoli sprawdzić SELECT COUNT(cui), cui FROM users GROUP BY cui HAVING COUNT(cui)>1
+
 ## [4.1.4] - 22.03.2020
 * Zmiany w lvl.
 * Poprawki błędów.
