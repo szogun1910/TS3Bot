@@ -25,7 +25,7 @@
 
 		'bot' => [
 		
-			'ver'	=> '414'	//Wersja bota.	
+			'ver'	=> '416'	//Wersja bota.	
 		
 		],
 
